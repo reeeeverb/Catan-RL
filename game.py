@@ -19,3 +19,10 @@ class Game():
         game_board = board.Board()
         game_board.generate_random_board()
         game_board.pp()
+        game_deck = board.Development_Cards()
+        generate_turn_tree()
+        self.turn_tree = []
+    def generate_turn_tree():
+        for c in range(len(game_board.terrain)):
+            self.turn_tree[game_board.numbers[c]].append(c,game_board.terrain[c])
+
