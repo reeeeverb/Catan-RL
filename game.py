@@ -17,6 +17,9 @@ class Game():
         self.player3 = player.Player()
         player_arr = [self.player1,self.player2,self.player3]
         random.shuffle(player_arr)
+        for player in player_arr:
+            val = input(player + ", where would you like to place your first settlement?\n")
+            player.place_settlement(val)
 
 def main():
     game = Game()
