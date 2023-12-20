@@ -1,6 +1,7 @@
 import random
 LEFT_EDGES = [0,7,16,27,38,47]
 RIGHT_EDGES = [6,15,26,37,46,53]
+LEGAL_PREGAME = [9,10,11,12,13,14,23,24,35,34,44,43,42,41,40,30,29,18,19]
 class Board():
     def __init__(self, *args, **kwargs):
         self.terrains = (4*['Pasture']+4*['Forest']+4*['Fields']+3*['Hills']+3*['Mountains']+1*['Desert'])
@@ -20,6 +21,8 @@ class Board():
         n.insert(self.terrains.index("Desert"),0)
         self.numbers = n
     def legal_placement(self,loc,pregame=False):
+        if pregame and loc not in LEGAL_PREGAME:
+            return False
         if not self.sides_clear(loc):
             print("sides")
             return False

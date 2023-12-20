@@ -24,8 +24,17 @@ class Game():
             self.player3.set_name(names[2])
         random.shuffle(player_arr)
         for player in player_arr:
-            val = int(input(player.name + ", where would you like to place your first settlement?\n"))
-            player.place_settlement(self.game_board,val,True)
+            done = False
+            while not done:
+                val = input(player.name + ", where would you like to place your first settlement?\n")
+                try:
+                    val = int(val)
+                    if player.place_settlement(self.game_board,val,True):
+                        done = True
+                    else:
+                        print("Invalid settlement location entered.\n")
+                except ValueError:
+                    print("Nonvalid int entered.\n")
 
 def main():
     game = Game()

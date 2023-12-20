@@ -13,5 +13,6 @@ class Player():
         if board.legal_placement(loc,pregame):
             print("Legal placement!")
             board.place_settlement(loc,self)
-        return True
+            return True
+        return False 
         
