@@ -25,15 +25,16 @@ class Board():
             return False
         if loc < 7 and (loc%2==1 or (loc%2==0 and self.clear_corners[loc+8])):
             return True
-        if loc < 16 and ((loc%2==1 and self.clear_corners[loc+10]) or (loc%2==0 and self.clear_corners[loc-8])):
+        if loc > 6 and loc < 16 and ((loc%2==1 and self.clear_corners[loc+10]) or (loc%2==0 and self.clear_corners[loc-8])):
             return True
-        if loc < 27 and ((loc%2==1 and self.clear_corners[loc-10]) or (loc%2==0 and self.clear_corners[loc+11])):
+        if loc > 15 and loc < 27 and ((loc%2==1 and self.clear_corners[loc-10]) or (loc%2==0 and self.clear_corners[loc+11])):
+            breakpoint()
             return True
-        if loc < 38 and ((loc%2==1 and self.clear_corners[loc-11]) or (loc%2==0 and self.clear_corners[loc+10])):
+        if loc > 26 and loc < 38 and ((loc%2==1 and self.clear_corners[loc-11]) or (loc%2==0 and self.clear_corners[loc+10])):
             return True
-        if loc < 47 and ((loc%2==1 and self.clear_corners[loc+8]) or (loc%2==0 and self.clear_corners[loc-10])):
+        if loc > 37 and loc < 47 and ((loc%2==1 and self.clear_corners[loc+8]) or (loc%2==0 and self.clear_corners[loc-10])):
             return True
-        if loc < 54 and ((loc%2==1 and self.clear_corners[loc-8]) or loc%2==0):
+        if loc > 46 and loc < 54 and ((loc%2==1 and self.clear_corners[loc-8]) or loc%2==0):
             return True
         print("vertical")
         return False
