@@ -1,12 +1,15 @@
 import random
+LEFT_EDGES = [0,7,16,27,38,47]
+RIGHT_EDGES = [6,15,26,37,46,53]
 class Board():
     def __init__(self, *args, **kwargs):
         self.terrains = (4*['Pasture']+4*['Forest']+4*['Fields']+3*['Hills']+3*['Mountains']+1*['Desert'])
         self.numbers = ([2]+2*[3]+2*[4]+2*[5]+2*[6]+2*[8]+2*[9]+2*[10]+2*[11]+[12]+[0])
         self.harbors = 4*["3"] + ["Brick"] + ["Lumber"] + ["Ore"] + ["Grain"] + ["Wool"]
-        self.city_locations = []
-        self.road_locations = []
-        self.settlement_locations = []
+        self.city_locations = 54*[None]
+        self.road_locations = 72*[None]
+        self.settlement_locations = 54*[None]
+        self.clear_corners = 54*[True]
     def generate_random_board(self):
         # 4*Pasture, 4*Forest, 4*Fields, 3*Hills, 3*Mountains, 1*Desert
         # 1*2, 2*3, 2*4, 2*5, 2*6, 2*8, 2*9, 2*10, 2*11, 1*12
@@ -16,6 +19,36 @@ class Board():
         random.shuffle(self.harbors)
         n.insert(self.terrains.index("Desert"),0)
         self.numbers = n
+    def legal_placement(self,loc,pregame=False):
+        if not self.sides_clear(loc):
+            print("sides")
+            return False
+        if loc < 7 and (loc%2==1 or (loc%2==0 and self.clear_corners[loc+8])):
+            return True
+        if loc < 16 and ((loc%2==1 and self.clear_corners[loc+10]) or (loc%2==0 and self.clear_corners[loc-8])):
+            return True
+        if loc < 27 and ((loc%2==1 and self.clear_corners[loc-10]) or (loc%2==0 and self.clear_corners[loc+11])):
+            return True
+        if loc < 38 and ((loc%2==1 and self.clear_corners[loc-11]) or (loc%2==0 and self.clear_corners[loc+10])):
+            return True
+        if loc < 47 and ((loc%2==1 and self.clear_corners[loc+8]) or (loc%2==0 and self.clear_corners[loc-10])):
+            return True
+        if loc < 54 and ((loc%2==1 and self.clear_corners[loc-8]) or loc%2==0):
+            return True
+        print("vertical")
+        return False
+    def sides_clear(self,loc):
+        if loc not in LEFT_EDGES and not self.clear_corners[loc-1]:
+            return False
+        if loc not in RIGHT_EDGES and not self.clear_corners[loc+1]:
+            return False
+        return True
+    def place_settlement(self,loc,player):
+        if not self.legal_placement(loc):
+            return False
+        self.settlement_locations[loc] = player
+        self.clear_corners[loc] = False
+        return True
     def pp(self):
         temp_b = 19 * [""]
         for c in range(len(self.terrains)):

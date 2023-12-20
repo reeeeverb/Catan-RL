@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 import pdb
 import random
-import board,player
+import board
+import player
 class Game():
     def __init__(self,*args,**kwargs):
         self.game_board = board.Board()
@@ -9,17 +10,22 @@ class Game():
         self.game_board.pp()
         self.game_deck = board.Development_Cards()
         self.turn_tree = 12*[[]]
-        self.pregame_setup()
-
-    def pregame_setup(self):
         self.player1 = player.Player()
         self.player2 = player.Player()
         self.player3 = player.Player()
+
+        self.pregame_setup()
+    def pregame_setup(self):
         player_arr = [self.player1,self.player2,self.player3]
+        names = input("Who is playing today?(3):\n").split()
+        if len(names) == 3:
+            self.player1.set_name(names[0])
+            self.player2.set_name(names[1])
+            self.player3.set_name(names[2])
         random.shuffle(player_arr)
         for player in player_arr:
-            val = input(player + ", where would you like to place your first settlement?\n")
-            player.place_settlement(val)
+            val = int(input(player.name + ", where would you like to place your first settlement?\n"))
+            player.place_settlement(self.game_board,val,True)
 
 def main():
     game = Game()
