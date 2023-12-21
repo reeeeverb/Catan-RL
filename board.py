@@ -15,7 +15,7 @@ class Board():
         self.clear_corners = 54*[True]
         self.road_corners = 54*[[] for i in range(54)]
         self.harbor_ownership = 9*[False]
-        bank = Bank()
+        self.bank = Bank()
         self.turn_tree = 13*[[] for i in range(13)]
     def generate_random_board(self):
         # 4*Pasture, 4*Forest, 4*Fields, 3*Hills, 3*Mountains, 1*Desert
@@ -26,10 +26,10 @@ class Board():
         random.shuffle(self.harbors)
         n.insert(self.terrains.index("Desert"),0)
         self.numbers = n
-    def legal_placement(self,loc,pregame=False):
+    def legal_placement(self,loc,player,pregame=False):
         if pregame and loc not in LEGAL_PREGAME:
             return False
-        if not pregame and not bank.can_afford("Settlment",player)[0]:
+        if not pregame and (not self.bank.can_afford("Settlment",player)[0]) and (player not in self.road_corners[loc]):
             return False
         if not self.sides_clear(loc):
             print("sides")
@@ -55,12 +55,14 @@ class Board():
             return False
         return True
     def place_settlement(self,loc,player,pregame=False):
-        if not self.legal_placement(loc):
+        if not self.legal_placement(loc,player,pregame):
             return False
-        bank.craft("Settlement",player)
+        self.bank.craft("Settlement",player)
         self.settlement_locations[loc] = player
         self.clear_corners[loc] = False
         self.road_corners[loc].append(player)
+        for tile in VERTEX_CONTACTS[loc]:
+            self.turn_tree[self.numbers[tile]].append((self.terrains[tile],player))
         if loc in HARBOR_LOCATIONS:
             self.harbor_ownership[HARBOR_LOCATIONS.index(loc)//2] = player
             player.harbors_owned.append(self.harbors[HARBOR_LOCATIONS.index(loc//2)])
@@ -107,7 +109,7 @@ class Board():
             return False, None
         print(left_vertex,right_vertex)
         if (player in self.road_corners[left_vertex]) or (player in self.road_corners[right_vertex]):
-            if (pregame == False and bank.can_afford("Road",player)) or (left_vertex == pregame or right_vertex == pregame):
+            if (pregame == False and self.bank.can_afford("Road",player)) or (left_vertex == pregame or right_vertex == pregame):
                 return True, left_vertex, right_vertex
         else:
             return False, left_vertex, right_vertex
@@ -115,7 +117,7 @@ class Board():
         result = self.legal_road(loc,player,pregame)
         if result[0]:
             if not pregame:
-                bank.craft("Road",player)
+                self.bank.craft("Road",player)
             self.road_corners[result[1]].append(player)
             self.road_corners[result[2]].append(player)
             self.road_locations[loc] = player
@@ -193,8 +195,8 @@ class Bank():
             if player.resource_cards[key] < self.building_costs[thing][key]:
                 return False, "insufficent funds"
     def craft(self,thing,player):
-        if not can_afford(self,thing,player)[0]:
-            return can_afford(self,thing,player)
+        if not self.can_afford(thing,player)[0]:
+            return self.can_afford(thing,player)
         for key in self.resources:
             player.resource[key] -= self.building_costs[thing][key]
             self.resource_cards += self.building_costs[thing][key]

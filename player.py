@@ -12,7 +12,7 @@ class Player():
     def set_name(self,name):
         self.name = name
     def place_settlement(self,board,loc,pregame=False):
-        if board.legal_placement(loc,pregame):
+        if board.legal_placement(loc,self,pregame):
             board.place_settlement(loc,self,pregame)
             self.craft_count["Settlement"]+=1
             return True
