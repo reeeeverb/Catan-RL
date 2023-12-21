@@ -1,3 +1,5 @@
+"It's amazing what we can do with computers these days." -- Wallace Wells
+
 ## Catan RL
 - Great game, gonna code it terribly then put some terrible AI on top of it
 
@@ -10,6 +12,7 @@
 - turns
 - robber
 - usage of development cards 
+- bank and maritime trades
 - interperson trading
 - building
 - victory points tracker
@@ -33,7 +36,7 @@
 - there are 72 possible road locations on a base catan game
 	- that is in fact more than 54
 ```python
-72 > 54
+72 > 54 # True
 ```
 - the numbering method is going to be the same as the settlements just 0-71 from the top left
 - rather than individually numbering which edges contact which im just going to have each road label which two vertices can have roads from the same player build out of them.
@@ -58,6 +61,10 @@
 - GODDAMN IT I HAVE TO MAP THE VERTICES TO TILES
 	- making a vertex map that is a 54 dimension array where each vertex lists its connecting tile(s)
 		- do not care if this is wrong, call it an alternative rule set
+
+#### Turns 
+- thanks to the turns tree this should be super simple
+- roll the two dice, add em up and look up through the turn tree
 
 #### Fair Board Generation
 - I stumbled upon [this article](https://www.boardgameanalysis.com/the-fair-catan-board-quest/) a while ago while looking for some balanced catan boards to play on with my roommates
