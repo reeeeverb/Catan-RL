@@ -31,15 +31,18 @@ class Game():
                     val = int(val)
                     if player.place_settlement(self.game_board,val,True):
                         done = True
+                        sett = val
                     else:
                         print("Invalid settlement location entered.\n")
                 except ValueError:
                     print("Nonvalid int entered.\n")
+            done1 = False
+            while not done1:
                 val = input(player.name + ", where would you like to place your road?\n")
                 try:
                     val = int(val)
-                    if player.place_road(self.game_board,val,True):
-                        done = True
+                    if player.place_road(self.game_board,val,sett):
+                        done1 = True
                     else:
                         print("Invalid road location entered.\n")
                 except ValueError:

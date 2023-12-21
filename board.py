@@ -71,7 +71,7 @@ class Board():
             left_vertex = ((loc-18)*2)+7
             right_vertex = left_vertex + 10
         elif loc > 22 and loc < 33:
-            left_vertex = loc - 5
+            left_vertex = loc - 7
             right_vertex = left_vertex + 1
         elif loc > 32 and loc < 39:
             left_vertex = ((loc-33)*2)+16
@@ -94,8 +94,10 @@ class Board():
         else:
             print("illegal road location")
             return False, None
+        print(left_vertex,right_vertex)
         if (player in self.road_corners[left_vertex]) or (player in self.road_corners[right_vertex]):
-            return True, left_vertex, right_vertex
+            if pregame == False or (left_vertex == pregame or right_vertex == pregame):
+                return True, left_vertex, right_vertex
         else:
             return False, left_vertex, right_vertex
     def place_road(self,loc,player,pregame=False):
