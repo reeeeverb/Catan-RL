@@ -4,6 +4,8 @@
 #### TO DO 
 - ~~implement roads~~
 - ~~harbors~~
+- ~~bank~~
+- turn tree
 - resource cards
 - turns
 - robber
@@ -49,12 +51,18 @@
 	- although I got to use an embedded dict so thats... pretty cool
 - honestly not having to fuck with the map and that stupid numbering system was such a needed break
 
+#### Turn Tree
+- data structure that is not really a tree but I like aliteration
+- everytime a settlement or city is build check every tile it is touch and add the resource+number to the array
+- should make dissing out resources on each turn a little faster
+
 #### Fair Board Generation
 - I stumbled upon [this article](https://www.boardgameanalysis.com/the-fair-catan-board-quest/) a while ago while looking for some balanced catan boards to play on with my roommates
 - It had some interesting insights as to what a balanced board and doesn't have a lot of solutions but the article does contain a lot of the correct questions.
 - if I can get a pretty good catan ai up and running then figuring out what boards are balanced is very easy, just see which games last the longest and come closest to a draw
 
 
-## Gripes
+## Misc.
 - I have just stumbled across perhaps the [most annoying Python behavior](https://stackoverflow.com/questions/7745562/appending-to-2d-lists-in-python) I have ever seen
 	- why is there just some random C bullshit interjected into python 2D lists?
+- This project is the reason why I [disabled the clock in ubuntu](https://extensions.gnome.org/extension/545/hide-top-bar/)
