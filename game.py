@@ -23,10 +23,10 @@ class Game():
             self.player2.set_name(names[1])
             self.player3.set_name(names[2])
         random.shuffle(player_arr)
-        for player in player_arr:
+        for player in (player_arr + list(reversed(player_arr))):
             done = False
             while not done:
-                val = input(player.name + ", where would you like to place your first settlement?\n")
+                val = input(player.name + ", where would you like to place your settlement?\n")
                 try:
                     val = int(val)
                     if player.place_settlement(self.game_board,val,True):
