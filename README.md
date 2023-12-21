@@ -2,7 +2,7 @@
 - Great game, gonna code it terribly then put some terrible AI on top of it
 
 #### TO DO 
-- implement roads
+- ~~implement roads~~
 - harbors
 - resource cards
 - turns
