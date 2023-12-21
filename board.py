@@ -170,9 +170,9 @@ class Development_Cards():
 class Bank():
     def __init__(self, *args, **kwargs):
         self.resource_cards = {"Brick":0,"Lumber":0,"Ore":0,"Grain":0,"Wool":0}
-        self.building_costs = {"Settlement":{"Brick":1,"Lumber":1,"Ore":0,"Grain":1,"Wool":1}
-                               "Road":{"Brick":1,"Lumber":1,"Ore":0,"Grain":0,"Wool":0}
-                               "City":{"Brick":0,"Lumber":0,"Ore":3,"Grain":0,"Wool":2}
+        self.building_costs = {"Settlement":{"Brick":1,"Lumber":1,"Ore":0,"Grain":1,"Wool":1},
+                               "Road":{"Brick":1,"Lumber":1,"Ore":0,"Grain":0,"Wool":0},
+                               "City":{"Brick":0,"Lumber":0,"Ore":3,"Grain":0,"Wool":2},
                                "Development_Card":{"Brick":0,"Lumber":0,"Ore":1,"Grain":1,"Wool":1}}
         self.resources = ["Brick","Lumber","Ore","Grain","Wool"]
         self.max_crafts = {"Settlement":5,"City":4,"Road":15}
