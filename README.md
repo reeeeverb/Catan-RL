@@ -3,7 +3,7 @@
 
 #### TO DO 
 - ~~implement roads~~
-- harbors
+- ~~harbors~~
 - resource cards
 - turns
 - robber

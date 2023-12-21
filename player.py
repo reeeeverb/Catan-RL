@@ -6,6 +6,7 @@ class Player():
         self.road_locations = []
         self.resource_cards = {"Brick":0, "Lumber":0, "Ore":0, "Grain":0, "Wool":0}
         self.development_cars = []
+        self.harbors_owned = []
         self.name = "None"
     def set_name(self,name):
         self.name = name

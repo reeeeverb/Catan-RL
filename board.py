@@ -2,6 +2,7 @@ import random
 LEFT_EDGES = [0,7,16,27,38,47]
 RIGHT_EDGES = [6,15,26,37,46,53]
 LEGAL_PREGAME = [9,10,11,12,13,23,24,35,34,44,43,42,41,40,30,29,18,19]
+HARBOR_LOCATIONS = [0,1,3,4,14,15,26,37,45,46,50,51,47,48,28,38,17,7]
 class Board():
     def __init__(self, *args, **kwargs):
         self.terrains = (4*['Pasture']+4*['Forest']+4*['Fields']+3*['Hills']+3*['Mountains']+1*['Desert'])
@@ -12,6 +13,7 @@ class Board():
         self.settlement_locations = 54*[None]
         self.clear_corners = 54*[True]
         self.road_corners = 54*[[] for i in range(54)]
+        self.harbor_ownership = 9*[False]
     def generate_random_board(self):
         # 4*Pasture, 4*Forest, 4*Fields, 3*Hills, 3*Mountains, 1*Desert
         # 1*2, 2*3, 2*4, 2*5, 2*6, 2*8, 2*9, 2*10, 2*11, 1*12
@@ -53,6 +55,9 @@ class Board():
         self.settlement_locations[loc] = player
         self.clear_corners[loc] = False
         self.road_corners[loc].append(player)
+        if loc in HARBOR_LOCATIONS:
+            self.harbor_ownership[HARBOR_LOCATIONS.index(loc)//2] = player
+            player.harbors_owned.append(self.harbors[HARBOR_LOCATIONS.index(loc//2)])
         return True
     def legal_road(self,loc,player,pregame=False):
         if self.road_locations[loc] != None:
