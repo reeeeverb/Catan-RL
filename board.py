@@ -11,7 +11,7 @@ class Board():
         self.road_locations = 72*[None]
         self.settlement_locations = 54*[None]
         self.clear_corners = 54*[True]
-        self.road_corners = 54*[[]]
+        self.road_corners = 54*[[] for i in range(54)]
     def generate_random_board(self):
         # 4*Pasture, 4*Forest, 4*Fields, 3*Hills, 3*Mountains, 1*Desert
         # 1*2, 2*3, 2*4, 2*5, 2*6, 2*8, 2*9, 2*10, 2*11, 1*12
@@ -32,7 +32,6 @@ class Board():
         if loc > 6 and loc < 16 and ((loc%2==1 and self.clear_corners[loc+10]) or (loc%2==0 and self.clear_corners[loc-8])):
             return True
         if loc > 15 and loc < 27 and ((loc%2==1 and self.clear_corners[loc-10]) or (loc%2==0 and self.clear_corners[loc+11])):
-            breakpoint()
             return True
         if loc > 26 and loc < 38 and ((loc%2==1 and self.clear_corners[loc-11]) or (loc%2==0 and self.clear_corners[loc+10])):
             return True
@@ -95,15 +94,15 @@ class Board():
         else:
             print("illegal road location")
             return False, None
-        if player in self.road_corners[left_vertex] or player in self.road_corners[right_vertex]:
+        if (player in self.road_corners[left_vertex]) or (player in self.road_corners[right_vertex]):
             return True, left_vertex, right_vertex
         else:
             return False, left_vertex, right_vertex
     def place_road(self,loc,player,pregame=False):
         result = self.legal_road(loc,player,pregame)
         if result[0]:
-            self.road_corners[left_vertex].append(player)
-            self.road_corners[right_vertex].append(player)
+            self.road_corners[result[1]].append(player)
+            self.road_corners[result[2]].append(player)
             self.road_locations[loc] = player
             return True
         return False

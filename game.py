@@ -35,10 +35,18 @@ class Game():
                         print("Invalid settlement location entered.\n")
                 except ValueError:
                     print("Nonvalid int entered.\n")
+                val = input(player.name + ", where would you like to place your road?\n")
+                try:
+                    val = int(val)
+                    if player.place_road(self.game_board,val,True):
+                        done = True
+                    else:
+                        print("Invalid road location entered.\n")
+                except ValueError:
+                    print("Nonvalid int entered.\n")
 
 def main():
     game = Game()
     breakpoint()
-
 if __name__=="__main__":
     main()

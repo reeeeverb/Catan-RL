@@ -11,8 +11,12 @@ class Player():
         self.name = name
     def place_settlement(self,board,loc,pregame=False):
         if board.legal_placement(loc,pregame):
-            print("Legal placement!")
             board.place_settlement(loc,self)
             return True
         return False 
+    def place_road(self,board,loc,pregame=False):
+        if board.legal_road(loc,self,pregame)[0]:
+            board.place_road(loc,self,pregame)
+            return True
+        return False
         
