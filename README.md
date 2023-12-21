@@ -29,8 +29,15 @@
 #### Roads
 - what a *pain*
 - there are 72 possible road locations on a base catan game
-	- that is more than 
+	- that is in fact more than 54
+```python
+72 > 54
+```
+- the numbering method is going to be the same as the settlements just 0-71 from the top left
+- rather than individually numbering which edges contact which im just going to have each road label which two vertices can have roads from the same player build out of them.
+- the fucking if statement I wrote for the roads might be the most abysmal thing I have ever written and that is saying something
 
 #### Fair Board Generation
 - I stumbled upon [this article](https://www.boardgameanalysis.com/the-fair-catan-board-quest/) a while ago while looking for some balanced catan boards to play on with my roommates
-- It had some interesting insights as to what a balanced board and doesn't have a lot of the solution but the article does contain a lot of the correct questions.
+- It had some interesting insights as to what a balanced board and doesn't have a lot of solutions but the article does contain a lot of the correct questions.
+- if I can get a pretty good catan ai up and running then figuring out what boards are balanced is very easy, just see which games last the longest and come closest to a draw

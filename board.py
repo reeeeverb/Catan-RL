@@ -11,6 +11,7 @@ class Board():
         self.road_locations = 72*[None]
         self.settlement_locations = 54*[None]
         self.clear_corners = 54*[True]
+        self.road_corners = 54*[[]]
     def generate_random_board(self):
         # 4*Pasture, 4*Forest, 4*Fields, 3*Hills, 3*Mountains, 1*Desert
         # 1*2, 2*3, 2*4, 2*5, 2*6, 2*8, 2*9, 2*10, 2*11, 1*12
@@ -52,7 +53,61 @@ class Board():
             return False
         self.settlement_locations[loc] = player
         self.clear_corners[loc] = False
+        self.road_corners[loc].append(player)
         return True
+    def legal_road(self,loc,player,pregame=False):
+        if self.road_locations[loc] != None:
+            return False, None
+        # deriving connected vertices
+        if loc < 6:
+            left_vertex = loc
+            right_vertex = loc+1
+        elif loc > 5 and loc < 10:
+            left_vertex = (loc-6)*2
+            right_vertex = left_vertex+8
+        elif loc > 9 and loc < 18:
+            left_vertex = loc - 3
+            right_vertex = left_vertex + 1
+        elif loc > 17 and loc < 23:
+            left_vertex = ((loc-18)*2)+7
+            right_vertex = left_vertex + 10
+        elif loc > 22 and loc < 33:
+            left_vertex = loc - 5
+            right_vertex = left_vertex + 1
+        elif loc > 32 and loc < 39:
+            left_vertex = ((loc-33)*2)+16
+            right_vertex = left_vertex + 11
+        elif loc > 38 and loc < 49:
+            left_vertex = loc - 12
+            right_vertex = left_vertex + 1
+        elif loc > 48 and loc < 54:
+            left_vertex = ((loc-49)*2)+28
+            right_vertex = left_vertex + 10
+        elif loc > 53 and loc < 62:
+            left_vertex = loc - 16
+            right_vertex = left_vertex + 1
+        elif loc > 61 and loc < 66:
+            left_vertex = ((loc-62)*2)+39
+            right_vertex = left_vertex + 8
+        elif loc > 65 and loc < 72:
+            left_vertex = loc - 19
+            right_vertex = left_vertex + 1
+        else:
+            print("illegal road location")
+            return False, None
+        if player in self.road_corners[left_vertex] or player in self.road_corners[right_vertex]:
+            return True, left_vertex, right_vertex
+        else:
+            return False, left_vertex, right_vertex
+    def place_road(self,loc,player,pregame=False):
+        result = self.legal_road(loc,player,pregame)
+        if result[0]:
+            self.road_corners[left_vertex].append(player)
+            self.road_corners[right_vertex].append(player)
+            self.road_locations[loc] = player
+            return True
+        return False
+
     def pp(self):
         temp_b = 19 * [""]
         for c in range(len(self.terrains)):
