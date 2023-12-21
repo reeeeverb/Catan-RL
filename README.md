@@ -42,6 +42,12 @@
 - only one person can own a harbor(because the 2 entrances(?) are within one vertex) so that simplified things a lot
 - most of the issues will arise when I have to make the trading interface but cross that bridge
 
+#### Resource Cards
+- originally I was just going to add these into the board class but its already a bit large for my liking
+	- plus I gave the development cards their own class and that just seems unfair
+- Most of this shit was already established its just resource mgmt
+	- although I got to use an embedded dict so thats... pretty cool
+
 #### Fair Board Generation
 - I stumbled upon [this article](https://www.boardgameanalysis.com/the-fair-catan-board-quest/) a while ago while looking for some balanced catan boards to play on with my roommates
 - It had some interesting insights as to what a balanced board and doesn't have a lot of solutions but the article does contain a lot of the correct questions.

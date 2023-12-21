@@ -161,6 +161,34 @@ class Development_Cards():
             print("INVALID CARD")
         self.used_stack.append(card)
 
+class Bank():
+    def __init__(self, *args, **kwargs):
+        self.resource_cards = {"Brick":0,"Lumber":0,"Ore":0,"Grain":0,"Wool":0}
+        self.building_costs = {"Settlement":{"Brick":1,"Lumber":1,"Ore":0,"Grain":1,"Wool":1}
+                               "Road":{"Brick":1,"Lumber":1,"Ore":0,"Grain":0,"Wool":0}
+                               "City":{"Brick":0,"Lumber":0,"Ore":3,"Grain":0,"Wool":2}
+                               "Development_Card":{"Brick":0,"Lumber":0,"Ore":1,"Grain":1,"Wool":1}}
+        self.resources = ["Brick","Lumber","Ore","Grain","Wool"]
+        self.max_crafts = {"Settlement":5,"City":4,"Road":15}
+        self.reset_bank()
+    def reset_bank(self):
+        self.resource_cards = {"Brick":19,"Lumber":19,"Ore":19,"Grain":19,"Wool":19}
+    def give_resources(self,resource,players):
+        if self.resource_cards[resource] > len(players):
+            for player in players:
+                player.resources_cards[resources] += 1
+        self.resources_cards[resources] -= len(players)
+    def craft(self,thing,player):
+        if self.max_crafts[thing] <= player.craft_count[thing]:
+            return False, "Player has no remaining {}".format(thing)
+        for key in self.resources:
+            if player.resource_cards[key] < self.building_costs[thing][key]:
+                return False, "insufficent funds"
+        for key in self.resources:
+            player.resource[key] -= self.building_costs[thing][key]
+            self.resource_cards += self.building_costs[thing][key]
+            return True
+
 class Dice():
     def roll_one():
         return random.randint(1,6)
