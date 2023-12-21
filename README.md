@@ -47,6 +47,7 @@
 	- plus I gave the development cards their own class and that just seems unfair
 - Most of this shit was already established its just resource mgmt
 	- although I got to use an embedded dict so thats... pretty cool
+- honestly not having to fuck with the map and that stupid numbering system was such a needed break
 
 #### Fair Board Generation
 - I stumbled upon [this article](https://www.boardgameanalysis.com/the-fair-catan-board-quest/) a while ago while looking for some balanced catan boards to play on with my roommates
