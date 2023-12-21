@@ -55,6 +55,9 @@
 - data structure that is not really a tree but I like aliteration
 - everytime a settlement or city is build check every tile it is touch and add the resource+number to the array
 - should make dissing out resources on each turn a little faster
+- GODDAMN IT I HAVE TO MAP THE VERTICES TO TILES
+	- making a vertex map that is a 54 dimension array where each vertex lists its connecting tile(s)
+		- do not care if this is wrong, call it an alternative rule set
 
 #### Fair Board Generation
 - I stumbled upon [this article](https://www.boardgameanalysis.com/the-fair-catan-board-quest/) a while ago while looking for some balanced catan boards to play on with my roommates
