@@ -37,6 +37,11 @@
 - rather than individually numbering which edges contact which im just going to have each road label which two vertices can have roads from the same player build out of them.
 - the fucking if statement I wrote for the roads might be the most abysmal thing I have ever written and that is saying something
 
+#### Harbors
+- actually a lot easier than I thought they would be
+- only one person can own a harbor(because the 2 entrances(?) are within one vertex) so that simplified things a lot
+- most of the issues will arise when I have to make the trading interface but cross that bridge
+
 #### Fair Board Generation
 - I stumbled upon [this article](https://www.boardgameanalysis.com/the-fair-catan-board-quest/) a while ago while looking for some balanced catan boards to play on with my roommates
 - It had some interesting insights as to what a balanced board and doesn't have a lot of solutions but the article does contain a lot of the correct questions.
