@@ -20,7 +20,7 @@ class Game():
         self.player3 = player.Player()
         self.player_arr = [self.player1,self.player2,self.player3]
         self.dice = board.Dice()
-
+        self.front_end = front_end.Front()
         self.pregame_setup()
         self.take_turn()
     def pregame_setup(self):
@@ -30,6 +30,8 @@ class Game():
             self.player2.set_name(names[1])
             self.player3.set_name(names[2])
         random.shuffle(self.player_arr)
+        self.front_end.draw_board(200,175,self.game_board)
+        time.sleep(10000)
         for player in (self.player_arr + list(reversed(self.player_arr))):
             done = False
             while not done:
@@ -62,8 +64,6 @@ class Game():
 
 
 def main():
-    front_end.pygame_start()
     game = Game()
-    time.sleep(10000)
 if __name__=="__main__":
     main()
