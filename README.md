@@ -69,6 +69,9 @@
 #### GUI 
 - originally I was gonna procrastinate the front end til the very end of the project but at this point most of the things I am programming will be simplified by its existencefor troubleshooting purposes
 - gonna use [pygame](pygame.org) because I am simply that guy
+	- I have never used pygame before
+- gotta do the little glowing effect whenever something needs to be placed
+	- the chess.com arcade effect whenever you click on a piece yknow
 
 #### Fair Board Generation
 - I stumbled upon [this article](https://www.boardgameanalysis.com/the-fair-catan-board-quest/) a while ago while looking for some balanced catan boards to play on with my roommates
