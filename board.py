@@ -107,7 +107,7 @@ class Board():
         else:
             print("illegal road location")
             return False, None
-        print(left_vertex,right_vertex)
+        #print(left_vertex,right_vertex)
         if (player in self.road_corners[left_vertex]) or (player in self.road_corners[right_vertex]):
             if (pregame == False and self.bank.can_afford("Road",player)) or (left_vertex == pregame or right_vertex == pregame):
                 return True, left_vertex, right_vertex
@@ -154,7 +154,6 @@ class Development_Cards():
         if a == None:
             a = self 
         random.shuffle(a.card_stack)
-        print(a.card_stack)
     def draw_card(a = None):
         if a == None:
             a = self
@@ -188,6 +187,10 @@ class Bank():
             for player in players:
                 player.resources_cards[resources] += 1
         self.resources_cards[resources] -= len(players)
+    def give_resource(self,resource,player):
+        if self.resource_cards[resource] > 0:
+            player.resource_cards[resource] += 1
+        self.resource_cards[resource] -= 1
     def can_afford(self,thing,player):
         if self.max_crafts[thing] <= player.craft_count[thing]:
             return False, "Player has no remaining {}".format(thing)
@@ -201,11 +204,17 @@ class Bank():
             player.resource[key] -= self.building_costs[thing][key]
             self.resource_cards += self.building_costs[thing][key]
             return True
+    def dice_rolled(self,turn_tree):
+        terrain_to_resource = {"Forest":"Lumber","Hills":"Brick","Mountains":"Ore","Fields":"Grain","Pasture":"Wool"}
+        if len(turn_tree) == 0:
+            return True
+        for e in turn_tree:
+            self.give_resource(terrain_to_resource[e[0]],e[1])
 
 class Dice():
-    def roll_one():
+    def roll_one(self):
         return random.randint(1,6)
-    def roll_two():
+    def roll_two(self):
         return random.randint(1,6) + random.randint(1,6)
 
 

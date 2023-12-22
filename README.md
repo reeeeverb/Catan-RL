@@ -8,7 +8,7 @@
 - ~~harbors~~
 - ~~bank~~
 - ~~turn tree~~
-- resource cards
+- ~resource cards~
 - turns
 - robber
 - usage of development cards 
