@@ -66,6 +66,10 @@
 - thanks to the turns tree this should be super simple
 - roll the two dice, add em up and look up through the turn tree
 
+#### GUI 
+- originally I was gonna procrastinate the front end til the very end of the project but at this point most of the things I am programming will be simplified by its existencefor troubleshooting purposes
+- gonna use [pygame](pygame.org) because I am simply that guy
+
 #### Fair Board Generation
 - I stumbled upon [this article](https://www.boardgameanalysis.com/the-fair-catan-board-quest/) a while ago while looking for some balanced catan boards to play on with my roommates
 - It had some interesting insights as to what a balanced board and doesn't have a lot of solutions but the article does contain a lot of the correct questions.
