@@ -1,9 +1,11 @@
 #!/usr/bin/python3
+import time
 import pygame
 import pdb
 import random
 import board
 import player
+import front_end
 import builtins
 from unittest.mock import patch
 class Game():
@@ -60,10 +62,8 @@ class Game():
 
 
 def main():
-    pygame.init()
-    screen = pygame.display.set_mode((1280, 720))
-    clock = pygame.time.Clock()
-    running = True
+    front_end.pygame_start()
     game = Game()
+    time.sleep(10000)
 if __name__=="__main__":
     main()
