@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import pygame
 import pdb
 import random
 import board
@@ -59,6 +60,10 @@ class Game():
 
 
 def main():
+    pygame.init()
+    screen = pygame.display.set_mode((1280, 720))
+    clock = pygame.time.Clock()
+    running = True
     game = Game()
 if __name__=="__main__":
     main()
