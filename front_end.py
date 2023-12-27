@@ -40,5 +40,37 @@ class Front():
         draw_tile(x,y+300,terrains[16])
         draw_tile(x+100,y+300,terrains[17])
         draw_tile(x+200,y+300,terrains[18])
+        corners = self.board_corners(x,y)
         pygame.display.flip()
+        return corners
+
+    def board_corners(self,x,y):
+        out = []
+        tile_corners = self.tile_corners
+        out+=(tile_corners(x-50,y-75,3))
+        out+=(tile_corners(x-100,y,4))
+        out+=(tile_corners(x-150,y+75,5))
+        out+=(tile_corners(x-150,y+125,5,True))
+        out+=(tile_corners(x-100,y+200,4,True))
+        out+=(tile_corners(x-50,y+275,3,True))
+        return out
+
+    def tile_corners(self,x,y,r,inverted=False):
+        #150,100
+        result = []
+        sprites = []
+        result.append((x,y))
+        for i in range(r):
+            if inverted:
+                result.append((x+50,y+25))
+                result.append((x+100,y))
+            else:  
+                result.append((x+50,y-25))
+                result.append((x+100,y))
+            x +=100 
+        for c in result:
+            s = pygame.draw.circle(self.screen,"red",(c[0],c[1]),5)
+            sprites.append(s)
+        return sprites
+
 

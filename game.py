@@ -23,15 +23,15 @@ class Game():
         self.front_end = front_end.Front()
         self.pregame_setup()
         self.take_turn()
+        self.board_corners = []
     def pregame_setup(self):
+        self.board_corners = self.front_end.draw_board(200,175,self.game_board)
         names = input("Who is playing today?(3):\n").split()
         if len(names) == 3:
             self.player1.set_name(names[0])
             self.player2.set_name(names[1])
             self.player3.set_name(names[2])
         random.shuffle(self.player_arr)
-        self.front_end.draw_board(200,175,self.game_board)
-        time.sleep(10000)
         for player in (self.player_arr + list(reversed(self.player_arr))):
             done = False
             while not done:

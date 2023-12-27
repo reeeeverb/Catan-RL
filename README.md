@@ -73,6 +73,7 @@
 - gotta do the little glowing effect whenever something needs to be placed
 	- the chess.com arcade effect whenever you click on a piece yknow
 - im actually having so much fun using pygame, might be the best library I have ever used
+- corners are programmatically generated, implementing working with screen rather than numbers now
 
 #### Fair Board Generation
 - I stumbled upon [this article](https://www.boardgameanalysis.com/the-fair-catan-board-quest/) a while ago while looking for some balanced catan boards to play on with my roommates
