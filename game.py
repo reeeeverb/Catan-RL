@@ -26,25 +26,30 @@ class Game():
         self.board_corners = []
     def pregame_setup(self):
         self.board_corners = self.front_end.draw_board(200,175,self.game_board)
-        names = input("Who is playing today?(3):\n").split()
+        corners = self.board_corners
+        print(corners)
+        #names = input("Who is playing today?(3):\n").split()
+        names = ["Skyhlar","David","Daphne"]
         if len(names) == 3:
             self.player1.set_name(names[0])
             self.player2.set_name(names[1])
             self.player3.set_name(names[2])
         random.shuffle(self.player_arr)
         for player in (self.player_arr + list(reversed(self.player_arr))):
-            done = False
-            while not done:
-                val = input(player.name + ", where would you like to place your settlement?\n")
-                try:
-                    val = int(val)
-                    if player.place_settlement(self.game_board,val,True):
-                        done = True
-                        sett = val
-                    else:
-                        print("Invalid settlement location entered.\n")
-                except ValueError:
-                    print("Nonvalid int entered.\n")
+            #val = input(player.name + ", where would you like to place your settlement?\n")
+            invalid_loc = True
+            while invalid_loc:
+                for event in pygame.event.get():
+                    if event.type == pygame.MOUSEBUTTONUP:
+                        pos = pygame.mouse.get_pos()
+                        clicked = [s for s in corners if s.collidepoint(pos)]
+                        if clicked !=[] and player.place_settlement(self.game_board,corners.index(clicked[0]),True):
+                            invalid_loc = False
+                            sett = corners.index(clicked[0])
+                        else:
+                            print("Invalid Location")
+                    if event.type == pygame.QUIT:
+                        running = False
             done1 = False
             while not done1:
                 val = input(player.name + ", where would you like to place your road?\n")

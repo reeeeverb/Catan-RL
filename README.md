@@ -75,6 +75,10 @@
 - im actually having so much fun using pygame, might be the best library I have ever used
 - corners are programmatically generated, implementing working with screen rather than numbers now
 
+- show settlements on board
+- do edge touch detection for road placement
+	- kill me now
+
 #### Fair Board Generation
 - I stumbled upon [this article](https://www.boardgameanalysis.com/the-fair-catan-board-quest/) a while ago while looking for some balanced catan boards to play on with my roommates
 - It had some interesting insights as to what a balanced board and doesn't have a lot of solutions but the article does contain a lot of the correct questions.
