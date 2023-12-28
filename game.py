@@ -51,17 +51,18 @@ class Game():
                             print("Invalid Location")
                     if event.type == pygame.QUIT:
                         running = False
-            done1 = False
-            while not done1:
-                val = input(player.name + ", where would you like to place your road?\n")
-                try:
-                    val = int(val)
-                    if player.place_road(self.game_board,val,sett):
-                        done1 = True
-                    else:
-                        print("Invalid road location entered.\n")
-                except ValueError:
-                    print("Nonvalid int entered.\n")
+            invalid_loc = True
+            while invalid_loc:
+                for event in pygame.event.get():
+                    if event.type == pygame.MOUSEBUTTONUP:
+                        pos = pygame.mouse.get_pos()
+                        c_clicked = [s for s in edges if s.collidepoint(pos)]
+                        if c_clicked !=[] and player.place_road(self.game_board,edges.index(c_clicked[0]),sett):
+                            invalid_loc = False
+                        else:
+                            print("Invalid Location")
+                    if event.type == pygame.QUIT:
+                        running = False
     def take_turn(self):
         for player in self.player_arr:
             roll_result = self.dice.roll_two()
