@@ -24,10 +24,11 @@ class Game():
         self.pregame_setup()
         self.take_turn()
         self.board_corners = []
+        self.board_edges = []
     def pregame_setup(self):
-        self.board_corners = self.front_end.draw_board(200,175,self.game_board)
+        self.board_corners,self.board_edges = self.front_end.draw_board(200,175,self.game_board)
         corners = self.board_corners
-        print(corners)
+        edges = self.board_edges
         #names = input("Who is playing today?(3):\n").split()
         names = ["Skyhlar","David","Daphne"]
         if len(names) == 3:

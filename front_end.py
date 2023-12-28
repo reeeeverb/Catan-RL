@@ -40,9 +40,46 @@ class Front():
         draw_tile(x,y+300,terrains[16])
         draw_tile(x+100,y+300,terrains[17])
         draw_tile(x+200,y+300,terrains[18])
+        edges = self.board_edges(x,y)
         corners = self.board_corners(x,y)
         pygame.display.flip()
-        return corners
+        return corners,edges
+
+    def board_edges(self,x,y):
+        tile_edges = self.tile_edges
+        out = []
+        out+=(tile_edges(x-50,y-75,3))
+        out+=(tile_edges(x-50,y-75,3,vertical=True))
+        out+=(tile_edges(x-100,y,4))
+        out+=(tile_edges(x-100,y,4,vertical=True))
+        out+=(tile_edges(x-150,y+75,5))
+        out+=(tile_edges(x-150,y+75,5,vertical=True))
+        out+=(tile_edges(x-150,y+125,5,inverted = True))
+        out+=(tile_edges(x-100,y+150,4,vertical = True))
+        out+=(tile_edges(x-100,y+200,4,inverted = True))
+        out+=(tile_edges(x-50,y+225,3,vertical = True))
+        out+=(tile_edges(x-50,y+275,3,inverted = True))
+        return out
+    def tile_edges(self,x,y,r,inverted = False, vertical=False):
+        result = []
+        sprites = []
+        for i in range(r):
+            if inverted:
+                result.append(((x,y),(x+50,y+25)))
+                result.append(((x+50,y+25),(x+100,y)))
+            elif vertical:
+                result.append(((x,y),(x,y+50)))
+            else:  
+                result.append(((x,y),(x+50,y-25)))
+                result.append(((x+50,y-25),(x+100,y)))
+            x +=100 
+        if vertical:
+            result.append(((x,y),(x,y+50)))
+        for fir in result:
+            s = pygame.draw.line(self.screen,"black",fir[0],fir[1],4)
+            sprites.append(s)
+        return sprites
+
 
     def board_corners(self,x,y):
         out = []

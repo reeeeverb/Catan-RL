@@ -78,6 +78,7 @@
 - show settlements on board
 - do edge touch detection for road placement
 	- kill me now
+	- wasn't that bad, very similar to corner drawing
 
 #### Fair Board Generation
 - I stumbled upon [this article](https://www.boardgameanalysis.com/the-fair-catan-board-quest/) a while ago while looking for some balanced catan boards to play on with my roommates
