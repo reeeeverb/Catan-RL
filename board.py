@@ -30,7 +30,7 @@ class Board():
     def legal_placement(self,loc,player,pregame=False):
         if pregame and loc not in LEGAL_PREGAME:
             return False
-        if not pregame and (not self.bank.can_afford("Settlment",player)[0]) and (player not in self.road_corners[loc]):
+        if not pregame and (not self.bank.can_afford("Settlement",player)[0]) and (player not in self.road_corners[loc]):
             return False
         if not self.sides_clear(loc):
             print("sides")

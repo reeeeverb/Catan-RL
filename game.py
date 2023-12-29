@@ -38,6 +38,13 @@ class Game():
             self.player3.set_info(names[2],"orangered",False)
         random.shuffle(self.player_arr)
         if DEBUG_SKIP_PG:
+            self.player1.place_settlement(self.game_board,9,True)
+            self.player2.place_settlement(self.game_board,30,True)
+            self.player3.place_settlement(self.game_board,41,True)
+            self.player1.place_settlement(self.game_board,12,True)
+            self.player2.place_settlement(self.game_board,23,True)
+            self.player3.place_settlement(self.game_board,35,True)
+            self.front_end.refresh(self.game_board)
             return
         for player in (self.player_arr + list(reversed(self.player_arr))):
             #val = input(player.name + ", where would you like to place your settlement?\n")
