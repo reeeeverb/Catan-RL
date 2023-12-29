@@ -32,9 +32,9 @@ class Game():
         #names = input("Who is playing today?(3):\n").split()
         names = ["Skyhlar","David","Daphne"]
         if len(names) == 3:
-            self.player1.set_name(names[0])
-            self.player2.set_name(names[1])
-            self.player3.set_name(names[2])
+            self.player1.set_info(names[0],"indigo")
+            self.player2.set_info(names[1],"fuchsia")
+            self.player3.set_info(names[2],"orangered")
         random.shuffle(self.player_arr)
         for player in (self.player_arr + list(reversed(self.player_arr))):
             #val = input(player.name + ", where would you like to place your settlement?\n")

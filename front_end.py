@@ -117,8 +117,8 @@ class Front():
         rect = self.corners[index]
         x = rect.x-5
         y = rect.y+15
-        print(rect)
-        pygame.draw.polygon(self.screen,"blue",[(x,y),(x,y-15),(x+10,y-25),(x+20,y-15),(x+20,y)])
+        color = player.color
+        pygame.draw.polygon(self.screen,color,[(x,y),(x,y-15),(x+10,y-25),(x+20,y-15),(x+20,y)])
         pygame.draw.polygon(self.screen,"black",[(x,y),(x,y-15),(x+10,y-25),(x+20,y-15),(x+20,y)],3)
         #pygame.draw.circle(self.screen,"blue",(rect.center),5)
         pygame.display.flip()
