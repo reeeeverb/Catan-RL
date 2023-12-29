@@ -23,9 +23,9 @@ class Game():
         self.dice = board.Dice()
         self.front_end = front_end.Front()
         self.pregame_setup()
-        self.take_turn()
         self.board_corners = []
         self.board_edges = []
+        self.take_turn()
     def pregame_setup(self):
         self.board_corners,self.board_edges = self.front_end.draw_board(200,175,self.game_board)
         corners = self.board_corners
@@ -76,13 +76,26 @@ class Game():
                         running = False
             self.front_end.refresh(self.game_board)
     def take_turn(self):
-        for player in self.player_arr:
-            roll_result = self.dice.roll_two()
-            print("A {} was rolled!".format(roll_result))
-            self.game_board.bank.dice_rolled(self.game_board.turn_tree[roll_result])
-            if player.human:
-                self.front_end.draw_resources(self.game_board,player)
-                time.sleep(10000)
+        while not self.game_over:
+            for player in self.player_arr:
+                roll_result = self.dice.roll_two()
+                print("A {} was rolled!".format(roll_result))
+                self.game_board.bank.dice_rolled(self.game_board.turn_tree[roll_result])
+                if player.human:
+                    turn_ended = False
+                    sprites = self.front_end.draw_player_turn(self.game_board,player)
+                    while not turn_ended:
+                        for event in pygame.event.get():
+                            if event.type == pygame.MOUSEBUTTONUP:
+                                pos = pygame.mouse.get_pos()
+                                clicked = [s for s in sprites if s.rect.collidepoint(pos)]
+                                if clicked !=[] and clicked[0].name == "end_turn":
+                                    return
+                                else:
+                                    print("Invalid Location")
+                            if event.type == pygame.QUIT:
+                                running = False
+            
 
 
 

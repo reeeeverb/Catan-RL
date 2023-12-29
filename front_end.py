@@ -17,6 +17,7 @@ class Front():
         self.edges_coords=[]
         self.settlement_sprites = pygame.sprite.Group()
         self.settlement_bg_sprites = pygame.sprite.Group()
+        self.turn_sprites = pygame.sprite.Group()
 
     def draw_tile(self,x,y,terrain):
         screen = self.screen
@@ -145,7 +146,7 @@ class Front():
                 self.draw_settlement(index,board.settlement_locations[index])
         pygame.display.flip()
 
-    def draw_resources(self,board,player):
+    def draw_player_turn(self,board,player):
         font = pygame.font.SysFont(None, 48)
 
         lumber = sprites.Lumber_RC()
@@ -189,8 +190,13 @@ class Front():
         dev_afford = board.bank.can_afford("Development_Card",player)[0]
         development_card = sprites.Development_CB(self.screen,dev_afford)
 
+        end_turn_b = sprites.End_Turn_Button(self.screen)
+
+        self.turn_sprites.add(end_turn_b)
 
         pygame.display.flip()
+
+        return self.turn_sprites
 
 
 
