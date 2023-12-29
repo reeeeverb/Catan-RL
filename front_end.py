@@ -156,10 +156,13 @@ class Front():
         self.turn_sprites.add(brick)
 
         ore = sprites.Ore_RC(self.screen, player.resource_cards["Ore"])
+        self.turn_sprites.add(ore)
 
         grain = sprites.Grain_RC(self.screen, player.resource_cards["Grain"])
+        self.turn_sprites.add(grain)
 
         wool = sprites.Wool_RC(self.screen, player.resource_cards["Wool"])
+        self.turn_sprites.add(wool)
 
         img = font.render("Crafting",True,"Black")
         self.screen.blit(img,(870,150))

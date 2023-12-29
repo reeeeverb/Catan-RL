@@ -18,41 +18,61 @@ class Brick_RC(pygame.sprite.Sprite):
     def __init__(self,screen,brick_count):
         super(Brick_RC, self).__init__()
         font = pygame.font.SysFont(None, 48)
+        self.name = "brick"
         self.surf = pygame.transform.scale_by(pygame.image.load("imgs/brick.png").convert(),.125)
         self.rect = self.surf.get_rect()
         screen.blit(self.surf,(750,30))
         img = font.render(str(brick_count),True,"black")
         screen.blit(img,(840,60))
+        self.rect = self.surf.get_rect()
+        self.rect.x = 750
+        self.rect.y = 30
+        self.rect.width += 20
 
 class Ore_RC(pygame.sprite.Sprite):
     def __init__(self,screen,ore_count):
         font = pygame.font.SysFont(None, 48)
+        self.name = "ore"
         super(Ore_RC, self).__init__()
         self.surf = pygame.transform.scale_by(pygame.image.load("imgs/ore.png").convert(),.125)
         self.rect = self.surf.get_rect()
         screen.blit(self.surf,(875,30))
         img = font.render(str(ore_count),True,"black")
         screen.blit(img,(980,60))
+        self.rect = self.surf.get_rect()
+        self.rect.x = 875
+        self.rect.y = 30
+        self.rect.width += 20
 
 class Grain_RC(pygame.sprite.Sprite):
     def __init__(self, screen, grain_count):
         super(Grain_RC, self).__init__()
         font = pygame.font.SysFont(None, 48)
+        self.name = "grain"
         self.surf = pygame.transform.scale_by(pygame.image.load("imgs/grain.png").convert(),.15)
         self.rect = self.surf.get_rect()
         screen.blit(self.surf,(1000,15))
         img = font.render(str(grain_count),True,"black")
         screen.blit(img,(1100,60))
+        self.rect = self.surf.get_rect()
+        self.rect.x = 1000
+        self.rect.y = 15
+        self.rect.width += 20
 
 class Wool_RC(pygame.sprite.Sprite):
     def __init__(self, screen, wool_count):
         super(Wool_RC, self).__init__()
         font = pygame.font.SysFont(None, 48)
+        self.name = "wool"
         self.surf = pygame.transform.scale_by(pygame.image.load("imgs/sheep.png").convert(),.25)
         self.rect = self.surf.get_rect()
         screen.blit(self.surf,(1165,50))
         img = font.render(str(wool_count),True,"black")
         screen.blit(img,(1230,60))
+        self.rect = self.surf.get_rect()
+        self.rect.x = 1165
+        self.rect.y = 50
+        self.rect.width += 20
 
 class Settlement_CB(pygame.sprite.Sprite):
     def __init__(self,screen,color):
