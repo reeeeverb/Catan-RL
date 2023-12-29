@@ -198,6 +198,7 @@ class Bank():
         for key in self.resources:
             if player.resource_cards[key] < self.building_costs[thing][key]:
                 return False, "insufficent funds"
+        return True, "funds sufficent"
     def craft(self,thing,player):
         if not self.can_afford(thing,player)[0]:
             return self.can_afford(thing,player)

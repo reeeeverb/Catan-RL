@@ -176,11 +176,19 @@ class Front():
         img = font.render("Crafting",True,"Black")
         self.screen.blit(img,(870,150))
 
-        settlement = sprites.Settlement_CB(self.screen,player.color)
+        sett_color = "grey15"
+        if board.bank.can_afford("Settlement",player)[0]:
+            sett_color = player.color
+        settlement = sprites.Settlement_CB(self.screen,sett_color)
 
-        road = sprites.Road_CB(self.screen,player.color)
+        road_color = "grey15"
+        if board.bank.can_afford("Road",player)[0]:
+            road_color = player.color
+        road = sprites.Road_CB(self.screen,road_color)
 
-        development_card = sprites.Development_CB(self.screen)
+        dev_afford = board.bank.can_afford("Development_Card",player)[0]
+        development_card = sprites.Development_CB(self.screen,dev_afford)
+
 
         pygame.display.flip()
 

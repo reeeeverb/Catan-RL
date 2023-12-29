@@ -45,15 +45,25 @@ class Road_CB(pygame.sprite.Sprite):
         pygame.draw.line(screen,color,first,second,6)
 
 class Development_CB(pygame.sprite.Sprite):
-    def __init__(self,screen):
+    def __init__(self,screen,afford):
         super(Development_CB,self).__init__()
         x= 1100
         y = 200
         w = 50
         h = 65
+        if not afford:
+            pygame.draw.rect(screen,"black",[(x-3,y-3),(w+6,h+6)])
+            pygame.draw.rect(screen,"gray15",[(x,y),(w,h)])
         pygame.draw.rect(screen,"black",[(x-3,y-3),(w+6,h+6)])
         pygame.draw.rect(screen,"gray80",[(x,y),(w,h)])
-        pygame.draw.circle(screen,"red",(x+w//2,y+h//2),20)
+        rect = pygame.draw.circle(screen,"red",(x+w//2,y+h//2),20)
         pygame.draw.circle(screen,"yellow",(x+w//2,y+h//2),15)
         pygame.draw.circle(screen,"gray80",(x+w//2,y+h//2),5)
+        rect.y +=10
+        rect.height -=10
+        rect = pygame.draw.arc(screen,"blue",rect,3.14,0,6)
+        rect.width -=12
+        rect.x += 6
+        rect.height -=5
+        pygame.draw.rect(screen,"blue",rect)
 
