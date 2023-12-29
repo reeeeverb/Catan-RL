@@ -90,6 +90,7 @@ class Game():
                             if event.type == pygame.MOUSEBUTTONUP:
                                 pos = pygame.mouse.get_pos()
                                 clicked = [s for s in sprites if s.rect.collidepoint(pos)]
+                                print(clicked)
                                 if clicked !=[] and clicked[0].name == "end_turn":
                                     turn_ended = True
                                 else:
