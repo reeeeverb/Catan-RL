@@ -146,8 +146,16 @@ class Front():
         pygame.display.flip()
 
     def draw_resources(self,board,player):
-        resource = sprites.Resource_Card()
-        self.screen.blit(resource.surf,(300,300))
+        lumber = sprites.Lumber_RC()
+        self.screen.blit(lumber.surf,(600,30))
+        brick = sprites.Brick_RC()
+        self.screen.blit(brick.surf,(750,30))
+        ore = sprites.Ore_RC()
+        self.screen.blit(ore.surf,(875,30))
+        grain = sprites.Grain_RC()
+        self.screen.blit(grain.surf,(1000,20))
+        wool = sprites.Wool_RC()
+        self.screen.blit(wool.surf,(1165,50))
         pygame.display.flip()
 
 

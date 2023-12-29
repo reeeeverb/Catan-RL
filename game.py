@@ -8,6 +8,7 @@ import player
 import front_end
 import builtins
 from unittest.mock import patch
+DEBUG_SKIP_PG = True
 class Game():
     def __init__(self,*args,**kwargs):
         self.game_board = board.Board()
@@ -36,6 +37,8 @@ class Game():
             self.player2.set_info(names[1],"fuchsia",False)
             self.player3.set_info(names[2],"orangered",False)
         random.shuffle(self.player_arr)
+        if DEBUG_SKIP_PG:
+            return
         for player in (self.player_arr + list(reversed(self.player_arr))):
             #val = input(player.name + ", where would you like to place your settlement?\n")
             invalid_loc = True
