@@ -173,6 +173,13 @@ class Front():
         img = font.render(str(player.resource_cards["Wool"]),True,"black")
         self.screen.blit(img,(1230,60))
 
+        img = font.render("Crafting",True,"Black")
+        self.screen.blit(img,(870,150))
+
+        settlement = sprites.Settlement_CB(self.screen,player.color)
+
+        road = sprites.Road_CB(self.screen,player.color)
+
         pygame.display.flip()
 
 
