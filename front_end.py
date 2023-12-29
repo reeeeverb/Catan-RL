@@ -10,8 +10,10 @@ class Front():
         pygame.display.flip()
         self.clock.tick(60)
         self.settlements = 54*[None]
+        self.roads = 72*[None]
         self.corners = []
         self.edges = []
+        self.edges_coords=[]
 
     def draw_tile(self,x,y,terrain):
         screen = self.screen
@@ -82,6 +84,7 @@ class Front():
         for fir in result:
             s = pygame.draw.line(self.screen,"black",fir[0],fir[1],4)
             sprites.append(s)
+        self.edges_coords += result
         return sprites
 
 
@@ -120,7 +123,14 @@ class Front():
         color = player.color
         pygame.draw.polygon(self.screen,color,[(x,y),(x,y-15),(x+10,y-25),(x+20,y-15),(x+20,y)])
         pygame.draw.polygon(self.screen,"black",[(x,y),(x,y-15),(x+10,y-25),(x+20,y-15),(x+20,y)],3)
-        #pygame.draw.circle(self.screen,"blue",(rect.center),5)
+        self.settlements[index] = player
+        pygame.display.flip()
+
+    def draw_road(self,index,player):
+        coords = self.edges_coords[index]
+        color = player.color
+        pygame.draw.line(self.screen,color,coords[0],coords[1],5)
+        self.roads[index] = player
         pygame.display.flip()
 
     def refresh(self,board):
@@ -128,6 +138,10 @@ class Front():
             if board.settlement_locations[index] != self.settlements[index]:
                 player = board.settlement_locations[index]
                 self.draw_settlement(index,player)
+        for index in range(len(board.road_locations)):
+            if board.road_locations[index] != self.roads[index]:
+                player = board.road_locations[index]
+                self.draw_road(index,player)
 
 
 

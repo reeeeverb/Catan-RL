@@ -64,6 +64,7 @@ class Game():
                             print("Invalid Location")
                     if event.type == pygame.QUIT:
                         running = False
+            self.front_end.refresh(self.game_board)
     def take_turn(self):
         for player in self.player_arr:
             roll_result = self.dice.roll_two()
