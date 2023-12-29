@@ -51,6 +51,7 @@ class Game():
                             print("Invalid Location")
                     if event.type == pygame.QUIT:
                         running = False
+            self.front_end.refresh(self.game_board)
             invalid_loc = True
             while invalid_loc:
                 for event in pygame.event.get():

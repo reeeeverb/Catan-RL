@@ -17,6 +17,7 @@ class Board():
         self.harbor_ownership = 9*[False]
         self.bank = Bank()
         self.turn_tree = 13*[[] for i in range(13)]
+        self.pygame_coords = (None,None)
     def generate_random_board(self):
         # 4*Pasture, 4*Forest, 4*Fields, 3*Hills, 3*Mountains, 1*Desert
         # 1*2, 2*3, 2*4, 2*5, 2*6, 2*8, 2*9, 2*10, 2*11, 1*12

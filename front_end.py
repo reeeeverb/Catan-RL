@@ -9,6 +9,9 @@ class Front():
         #draw_board(200,175,[])
         pygame.display.flip()
         self.clock.tick(60)
+        self.settlements = 54*[None]
+        self.corners = []
+        self.edges = []
 
     def draw_tile(self,x,y,terrain):
         screen = self.screen
@@ -19,6 +22,7 @@ class Front():
         pygame.display.flip()
 
     def draw_board(self,x,y,board):
+        board.pygame_coords = (x,y) 
         draw_tile = self.draw_tile
         terrains = board.terrains
         draw_tile(x,y,terrains[0])
@@ -40,10 +44,10 @@ class Front():
         draw_tile(x,y+300,terrains[16])
         draw_tile(x+100,y+300,terrains[17])
         draw_tile(x+200,y+300,terrains[18])
-        edges = self.board_edges(x,y)
-        corners = self.board_corners(x,y)
+        self.edges = self.board_edges(x,y)
+        self.corners = self.board_corners(x,y)
         pygame.display.flip()
-        return corners,edges
+        return self.corners,self.edges
 
     def board_edges(self,x,y):
         tile_edges = self.tile_edges
@@ -109,5 +113,17 @@ class Front():
             s = pygame.draw.circle(self.screen,"red",(c[0],c[1]),5)
             sprites.append(s)
         return sprites
+    def draw_settlement(self,index,player):
+        rect = self.corners[index]
+        print(rect)
+        pygame.draw.circle(self.screen,"blue",(rect.centerx,rect.centery),5)
+        pygame.display.flip()
+
+    def refresh(self,board):
+        for index in range(len(board.settlement_locations)):
+            if board.settlement_locations[index] != self.settlements[index]:
+                player = board.settlement_locations[index]
+                self.draw_settlement(index,player)
+
 
 
