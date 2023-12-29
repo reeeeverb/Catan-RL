@@ -54,6 +54,7 @@ class Development_CB(pygame.sprite.Sprite):
         if not afford:
             pygame.draw.rect(screen,"black",[(x-3,y-3),(w+6,h+6)])
             pygame.draw.rect(screen,"gray15",[(x,y),(w,h)])
+            return
         pygame.draw.rect(screen,"black",[(x-3,y-3),(w+6,h+6)])
         pygame.draw.rect(screen,"gray80",[(x,y),(w,h)])
         rect = pygame.draw.circle(screen,"red",(x+w//2,y+h//2),20)

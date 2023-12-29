@@ -7,7 +7,7 @@ class Player():
         self.resource_cards = {"Brick":0, "Lumber":0, "Ore":0, "Grain":0, "Wool":0}
         self.development_cars = []
         self.harbors_owned = []
-        self.craft_count = {"Settlement":0,"City":0,"Road":0}
+        self.craft_count = {"Settlement":0,"City":0,"Road":0,"Development_Card":0}
         self.name = "None"
         self.color = None
         self.human = True

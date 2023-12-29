@@ -179,7 +179,7 @@ class Bank():
                                "City":{"Brick":0,"Lumber":0,"Ore":3,"Grain":0,"Wool":2},
                                "Development_Card":{"Brick":0,"Lumber":0,"Ore":1,"Grain":1,"Wool":1}}
         self.resources = ["Brick","Lumber","Ore","Grain","Wool"]
-        self.max_crafts = {"Settlement":5,"City":4,"Road":15}
+        self.max_crafts = {"Settlement":5,"City":4,"Road":15,"Development_Card":25}
         self.reset_bank()
     def reset_bank(self):
         self.resource_cards = {"Brick":19,"Lumber":19,"Ore":19,"Grain":19,"Wool":19}
