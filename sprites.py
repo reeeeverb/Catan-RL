@@ -37,7 +37,23 @@ class Settlement_CB(pygame.sprite.Sprite):
 class Road_CB(pygame.sprite.Sprite):
     def __init__(self,screen,color):
         super(Road_CB,self).__init__()
-        first = (800,250)
-        second = (850,300)
-        pygame.draw.line(self.screen,color,first,second,5)
+        first = (825,250)
+        second = (875,200)
+        b_first = (822,253)
+        b_second = (878,197)
+        pygame.draw.line(screen,"Black",b_first,b_second,10)
+        pygame.draw.line(screen,color,first,second,6)
+
+class Development_CB(pygame.sprite.Sprite):
+    def __init__(self,screen):
+        super(Development_CB,self).__init__()
+        x= 1100
+        y = 200
+        w = 50
+        h = 65
+        pygame.draw.rect(screen,"black",[(x-3,y-3),(w+6,h+6)])
+        pygame.draw.rect(screen,"gray80",[(x,y),(w,h)])
+        pygame.draw.circle(screen,"red",(x+w//2,y+h//2),20)
+        pygame.draw.circle(screen,"yellow",(x+w//2,y+h//2),15)
+        pygame.draw.circle(screen,"gray80",(x+w//2,y+h//2),5)
 

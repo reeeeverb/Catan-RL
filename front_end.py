@@ -180,6 +180,8 @@ class Front():
 
         road = sprites.Road_CB(self.screen,player.color)
 
+        development_card = sprites.Development_CB(self.screen)
+
         pygame.display.flip()
 
 
