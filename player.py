@@ -10,9 +10,11 @@ class Player():
         self.craft_count = {"Settlement":0,"City":0,"Road":0}
         self.name = "None"
         self.color = None
-    def set_info(self,name,color):
+        self.human = True
+    def set_info(self,name,color,human):
         self.name = name
         self.color = color
+        self.human = human
     def place_settlement(self,board,loc,pregame=False):
         if board.legal_placement(loc,self,pregame):
             board.place_settlement(loc,self,pregame)

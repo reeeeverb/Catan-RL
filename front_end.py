@@ -1,4 +1,5 @@
 import pygame
+import sprites
 class Front():
     def __init__(self,*args,**kwargs):
         pygame.init()
@@ -143,6 +144,13 @@ class Front():
             if board.settlement_locations[index] != None:
                 self.draw_settlement(index,board.settlement_locations[index])
         pygame.display.flip()
+
+    def draw_resources(self,board,player):
+        resource = sprites.Resource_Card()
+        self.screen.blit(resource.surf,(300,300))
+        pygame.display.flip()
+
+
 
 
 

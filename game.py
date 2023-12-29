@@ -32,9 +32,9 @@ class Game():
         #names = input("Who is playing today?(3):\n").split()
         names = ["Skyhlar","David","Daphne"]
         if len(names) == 3:
-            self.player1.set_info(names[0],"indigo")
-            self.player2.set_info(names[1],"fuchsia")
-            self.player3.set_info(names[2],"orangered")
+            self.player1.set_info(names[0],"indigo",True)
+            self.player2.set_info(names[1],"fuchsia",False)
+            self.player3.set_info(names[2],"orangered",False)
         random.shuffle(self.player_arr)
         for player in (self.player_arr + list(reversed(self.player_arr))):
             #val = input(player.name + ", where would you like to place your settlement?\n")
@@ -70,6 +70,10 @@ class Game():
             roll_result = self.dice.roll_two()
             print("A {} was rolled!".format(roll_result))
             self.game_board.bank.dice_rolled(self.game_board.turn_tree[roll_result])
+            if player.human:
+                self.front_end.draw_resources(self.game_board,player)
+                time.sleep(10000)
+
 
 
 def main():
