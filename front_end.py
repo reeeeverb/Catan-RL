@@ -146,16 +146,10 @@ class Front():
                 self.draw_settlement(index,board.settlement_locations[index])
         pygame.display.flip()
 
-    def clear_sprites(self,group):
-        group.empty()
-
     def draw_player_turn(self,board,player):
         font = pygame.font.SysFont(None, 48)
 
-        lumber = sprites.Lumber_RC()
-        self.screen.blit(lumber.surf,(600,30))
-        img = font.render(str(player.resource_cards["Lumber"]),True,"black")
-        self.screen.blit(img,(720,60))
+        lumber = sprites.Lumber_RC(self.screen,player.resource_cards["Lumber"])
 
         brick = sprites.Brick_RC()
         self.screen.blit(brick.surf,(750,30))

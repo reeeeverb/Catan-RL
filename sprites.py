@@ -1,10 +1,14 @@
 import pygame
 
 class Lumber_RC(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, screen, lumber_count):
         super(Lumber_RC, self).__init__()
+        font = pygame.font.SysFont(None, 48)
         self.surf = pygame.transform.scale_by(pygame.image.load("imgs/lumber.png").convert(),.125)
         self.rect = self.surf.get_rect()
+        screen.blit(self.surf,(600,30))
+        img = font.render(str(lumber_count),True,"black")
+        screen.blit(img,(720,60))
 class Brick_RC(pygame.sprite.Sprite):
     def __init__(self):
         super(Brick_RC, self).__init__()
