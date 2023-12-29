@@ -76,7 +76,8 @@ class Game():
                         running = False
             self.front_end.refresh(self.game_board)
     def take_turn(self):
-        while not self.game_over:
+        game_over = False
+        while not game_over:
             for player in self.player_arr:
                 roll_result = self.dice.roll_two()
                 print("A {} was rolled!".format(roll_result))
@@ -90,14 +91,13 @@ class Game():
                                 pos = pygame.mouse.get_pos()
                                 clicked = [s for s in sprites if s.rect.collidepoint(pos)]
                                 if clicked !=[] and clicked[0].name == "end_turn":
-                                    return
+                                    turn_ended = True
                                 else:
                                     print("Invalid Location")
                             if event.type == pygame.QUIT:
                                 running = False
-            
-
-
+                if player.victory_points >= 10:
+                    game_over = True
 
 def main():
     game = Game()

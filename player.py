@@ -11,6 +11,7 @@ class Player():
         self.name = "None"
         self.color = None
         self.human = True
+        self.victory_points = 0
     def set_info(self,name,color,human):
         self.name = name
         self.color = color
