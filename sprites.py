@@ -69,7 +69,7 @@ class Development_CB(pygame.sprite.Sprite):
         pygame.draw.rect(screen,"blue",rect)
 
 class End_Turn_Button(pygame.sprite.Sprite):
-    def __init__(self,screen):
+    def __init__(self,front_end,screen):
         super(End_Turn_Button,self).__init__()
         self.name = "end_turn"
         x = 1100 
@@ -80,3 +80,4 @@ class End_Turn_Button(pygame.sprite.Sprite):
         font = pygame.font.SysFont(None, 48)
         img = font.render("End Turn",True,"white")
         screen.blit(img,(x+5,y+18))
+        front_end.turn_sprites.add(self)

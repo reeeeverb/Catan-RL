@@ -146,6 +146,9 @@ class Front():
                 self.draw_settlement(index,board.settlement_locations[index])
         pygame.display.flip()
 
+    def clear_sprites(self,group):
+        group.empty()
+
     def draw_player_turn(self,board,player):
         font = pygame.font.SysFont(None, 48)
 
@@ -190,9 +193,8 @@ class Front():
         dev_afford = board.bank.can_afford("Development_Card",player)[0]
         development_card = sprites.Development_CB(self.screen,dev_afford)
 
-        end_turn_b = sprites.End_Turn_Button(self.screen)
+        end_turn_b = sprites.End_Turn_Button(self,self.screen)
 
-        self.turn_sprites.add(end_turn_b)
 
         pygame.display.flip()
 
