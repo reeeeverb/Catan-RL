@@ -146,6 +146,10 @@ class Front():
                 self.draw_settlement(index,board.settlement_locations[index])
         pygame.display.flip()
 
+    def clear_turn(self):
+        self.turn_sprites.empty()
+        pygame.draw.rect(self.screen,"aqua",[(600,0),(700,720)])
+
     def draw_player_turn(self,board,player):
         font = pygame.font.SysFont(None, 48)
 
