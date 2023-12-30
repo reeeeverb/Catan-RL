@@ -115,6 +115,8 @@ class Game():
                         print("No")
                 if event.type == pygame.QUIT:
                     not_done = False
+        self.front_end.cover_steal()
+        return
 
     def craft_settlement_clicked(self,player,board):
         self.front_end.show_legal_settlement_loc(board,player)

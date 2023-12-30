@@ -228,7 +228,7 @@ class Bank():
         total = sum(take_player.resource_cards.values())
         if total == 0:
             return
-        rand = random.randint(0,total)
+        rand = random.randint(1,total)
         while rand > 0:
             for key in self.resources:
                 rand -= take_player.resource_cards[key]

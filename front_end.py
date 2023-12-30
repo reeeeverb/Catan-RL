@@ -166,6 +166,10 @@ class Front():
         steal_from = sprites.Steal_From(self,self.screen,stealable)
         pygame.display.flip()
 
+    def cover_steal(self):
+        self.steal_sprites.empty()
+        pygame.draw.rect(self.screen,"aqua",[(0,500),(600,200)])
+
     def clear_turn(self):
         self.turn_sprites.empty()
         pygame.draw.rect(self.screen,"aqua",[(600,0),(700,720)])
