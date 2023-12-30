@@ -224,6 +224,17 @@ class Bank():
         if self.resource_cards[resource] > 0:
             player.resource_cards[resource] += 1
         self.resource_cards[resource] -= 1
+    def steal_random(self,give_player,take_player):
+        total = sum(take_player.resource_cards.values())
+        if total == 0:
+            return
+        rand = random.randint(0,total)
+        while rand > 0:
+            for key in self.resources:
+                rand -= take_player.resource_cards[key]
+        take_player.resource_cards[key] -= 1
+        give_player.resource_cards[key] += 1
+        print("{} stole {} from {}".format(give_player.name,key,take_player.name))
     def can_afford(self,thing,player):
         if self.max_crafts[thing] <= player.craft_count[thing]:
             return False, "Player has no remaining {}".format(thing)

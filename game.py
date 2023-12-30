@@ -107,8 +107,9 @@ class Game():
                     pos = pygame.mouse.get_pos()
                     clicked = [s for s in self.front_end.steal_sprites if s.rect.collidepoint(pos)]
                     if clicked !=[]:
-                        person = clicked[0].person
-                        print(person.name)
+                        take_person = clicked[0].person
+                        print(take_person.name)
+                        self.game_board.bank.steal_random(player,take_person)
                         not_done = False 
                     else:
                         print("No")
