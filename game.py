@@ -117,6 +117,11 @@ class Game():
                 if event.type == pygame.QUIT:
                     running = False
         return
+    def craft_card_clicked(self,player,board):
+        card = self.game_deck.draw_card() 
+        player.development_cards[card] +=1
+        print(player.development_cards)
+        self.front_end.update_development_cards_display(board,player)
     def take_turn(self):
         game_over = False
         while not game_over:
@@ -139,6 +144,8 @@ class Game():
                                     self.craft_settlement_clicked(player, self.game_board)
                                 elif clicked !=[] and clicked[0].name == "road" and self.game_board.bank.can_afford("Road",player)[0]:
                                     self.craft_road_clicked(player, self.game_board)
+                                elif clicked !=[] and clicked[0].name == "development card" and self.game_board.bank.can_afford("Development_Card",player)[0]:
+                                    self.craft_card_clicked(player, self.game_board)
                                 else:
                                     print("Invalid Location")
                             if event.type == pygame.QUIT:
