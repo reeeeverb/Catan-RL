@@ -26,6 +26,8 @@ class Game():
         self.board_corners = []
         self.board_edges = []
         self.take_turn()
+        self.longest_road = (4,None)
+        self.largest_army = (2,None)
     def pregame_setup(self):
         self.board_corners,self.board_edges = self.front_end.draw_board(200,175,self.game_board)
         corners = self.board_corners
@@ -168,6 +170,12 @@ class Game():
         self.front_end.update_development_cards_display(board,player)
         self.front_end.refresh(board,player)
     def play_knight(self,board,player):
+        move_robber(board,player,True)
+        player.played_knights += 1
+        if player.played_knights > self.largest_army[0]:
+            self.largest_army[1] = player
+            self.largest_army[0] = player.played_knights
+            player.give_largest_army()
         return
     def play_monopoly(self,board,player):
         return
