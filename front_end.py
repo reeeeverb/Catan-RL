@@ -148,7 +148,7 @@ class Front():
                 self.corners[index] = new_rect
         pygame.display.flip() 
 
-    def refresh(self,board):
+    def refresh(self,board,player=None):
         pygame.draw.rect(self.screen,"aqua",[(0,0),(600,720)])
         self.draw_board(GLOBAL_X,GLOBAL_Y,board)
         for index in range(len(board.road_locations)):
@@ -157,6 +157,9 @@ class Front():
         for index in range(len(board.settlement_locations)):
             if board.settlement_locations[index] != None:
                 self.draw_settlement(index,board.settlement_locations[index])
+        if player != None:
+            self.clear_turn()
+            self.draw_player_turn(board,player)
         pygame.display.flip()
 
     def clear_turn(self):

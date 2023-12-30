@@ -89,10 +89,10 @@ class Game():
                         if board.legal_placement(index,player):
                             if player.place_settlement(board,int(index)):
                                 print("hit")
-                                self.front_end.refresh(board)
+                                self.front_end.refresh(board,player)
                                 return True
                     else:
-                        self.front_end.refresh(board)
+                        self.front_end.refresh(board,player)
                         return False
                 if event.type == pygame.QUIT:
                     running = False
@@ -109,10 +109,10 @@ class Game():
                         index = self.front_end.edges.index(clicked[0])
                         if board.legal_placement(index,player):
                             if player.place_road(board,int(index)):
-                                self.front_end.refresh(board)
+                                self.front_end.refresh(board,player)
                                 return True
                     else:
-                        self.front_end.refresh(board)
+                        self.front_end.refresh(board,player)
                         return False
                 if event.type == pygame.QUIT:
                     running = False
@@ -120,8 +120,17 @@ class Game():
     def craft_card_clicked(self,player,board):
         card = self.game_deck.draw_card() 
         player.development_cards[card] +=1
+        self.game_board.bank.craft("Development_Card",player)
         print(player.development_cards)
         self.front_end.update_development_cards_display(board,player)
+    def play_knight(self,board,player):
+        return
+    def play_monopoly(self,board,player):
+        return
+    def play_rb(self,board,player):
+        return
+    def play_yop(self,board,player):
+        return
     def take_turn(self):
         game_over = False
         while not game_over:
@@ -146,6 +155,14 @@ class Game():
                                     self.craft_road_clicked(player, self.game_board)
                                 elif clicked !=[] and clicked[0].name == "development card" and self.game_board.bank.can_afford("Development_Card",player)[0]:
                                     self.craft_card_clicked(player, self.game_board)
+                                elif clicked !=[] and clicked[0].name == "Knight" and player.development_cards["Knight"] > 0:
+                                    self.play_knight(self.game_board,player)
+                                elif clicked !=[] and clicked[0].name == "RB" and player.development_cards["RB"] > 0:
+                                    self.play_rb(self.game_board,player)
+                                elif clicked !=[] and clicked[0].name == "Monopoly" and player.development_cards["Monopoly"] > 0:
+                                    self.play_monopoly(self.game_board,player)
+                                elif clicked !=[] and clicked[0].name == "YOP" and player.development_cards["YOP"]:
+                                    self.play_yop(self.game_board,player)
                                 else:
                                     print("Invalid Location")
                             if event.type == pygame.QUIT:

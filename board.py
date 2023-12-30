@@ -235,7 +235,7 @@ class Bank():
         for key in self.resources:
             player.resource_cards[key] -= self.building_costs[thing][key]
             self.resource_cards[key] += self.building_costs[thing][key]
-            return True
+        return True
     def dice_rolled(self,turn_tree):
         terrain_to_resource = {"Forest":"Lumber","Hills":"Brick","Mountains":"Ore","Fields":"Grain","Pasture":"Wool"}
         if len(turn_tree) == 0:
