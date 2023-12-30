@@ -91,8 +91,10 @@ class Game():
                                 pos = pygame.mouse.get_pos()
                                 clicked = [s for s in sprites if s.rect.collidepoint(pos)]
                                 print(clicked)
-                                if clicked !=[] and clicked[0].name == "end_turn":
+                                if clicked !=[] and clicked[0].name == "end turn":
                                     turn_ended = True
+                                elif clicked !=[] and clicked[0].name == "settlement"
+                                    self.craft_settlement_clicked(player)
                                 else:
                                     print("Invalid Location")
                             if event.type == pygame.QUIT:

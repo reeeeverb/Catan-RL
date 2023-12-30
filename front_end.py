@@ -175,21 +175,22 @@ class Front():
         if board.bank.can_afford("Settlement",player)[0]:
             sett_color = player.color
         settlement = sprites.Settlement_CB(self.screen,sett_color)
+        self.turn_sprites.add(settlement)
 
         road_color = "grey15"
         if board.bank.can_afford("Road",player)[0]:
             road_color = player.color
         road = sprites.Road_CB(self.screen,road_color)
+        self.turn_sprites.add(road)
 
         dev_afford = board.bank.can_afford("Development_Card",player)[0]
         development_card = sprites.Development_CB(self.screen,dev_afford)
+        self.turn_sprites.add(development_card)
 
         end_turn_b = sprites.End_Turn_Button(self,self.screen)
 
 
         pygame.display.flip()
-
-        print(self.turn_sprites)
 
         return self.turn_sprites
 

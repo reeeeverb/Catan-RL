@@ -77,33 +77,36 @@ class Wool_RC(pygame.sprite.Sprite):
 class Settlement_CB(pygame.sprite.Sprite):
     def __init__(self,screen,color):
         super(Settlement_CB,self).__init__()
+        self.name = "settlement"
         x = 700
         y = 250
         pygame.draw.polygon(screen,color,[(x,y),(x,y-30),(x+20,y-50),(x+40,y-30),(x+40,y)])
-        pygame.draw.polygon(screen,"black",[(x,y),(x,y-30),(x+20,y-50),(x+40,y-30),(x+40,y)],5)
+        self.rect = pygame.draw.polygon(screen,"black",[(x,y),(x,y-30),(x+20,y-50),(x+40,y-30),(x+40,y)],5)
 
 class Road_CB(pygame.sprite.Sprite):
     def __init__(self,screen,color):
         super(Road_CB,self).__init__()
+        self.name = "road"
         first = (825,250)
         second = (875,200)
         b_first = (822,253)
         b_second = (878,197)
-        pygame.draw.line(screen,"Black",b_first,b_second,10)
+        self.rect = pygame.draw.line(screen,"Black",b_first,b_second,10)
         pygame.draw.line(screen,color,first,second,6)
 
 class Development_CB(pygame.sprite.Sprite):
     def __init__(self,screen,afford):
+        self.name = "development card"
         super(Development_CB,self).__init__()
         x= 1100
         y = 200
         w = 50
         h = 65
         if not afford:
-            pygame.draw.rect(screen,"black",[(x-3,y-3),(w+6,h+6)])
+            self.rect = pygame.draw.rect(screen,"black",[(x-3,y-3),(w+6,h+6)])
             pygame.draw.rect(screen,"gray15",[(x,y),(w,h)])
             return
-        pygame.draw.rect(screen,"black",[(x-3,y-3),(w+6,h+6)])
+        self.rect = pygame.draw.rect(screen,"black",[(x-3,y-3),(w+6,h+6)])
         pygame.draw.rect(screen,"gray80",[(x,y),(w,h)])
         rect = pygame.draw.circle(screen,"red",(x+w//2,y+h//2),20)
         pygame.draw.circle(screen,"yellow",(x+w//2,y+h//2),15)
@@ -119,7 +122,7 @@ class Development_CB(pygame.sprite.Sprite):
 class End_Turn_Button(pygame.sprite.Sprite):
     def __init__(self,front_end,screen):
         super(End_Turn_Button,self).__init__()
-        self.name = "end_turn"
+        self.name = "end turn"
         x = 1100 
         y = 625
         w = 150
