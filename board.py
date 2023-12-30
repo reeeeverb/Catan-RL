@@ -225,6 +225,11 @@ class Bank():
         if self.resource_cards[resource] > 0:
             player.resource_cards[resource] += 1
         self.resource_cards[resource] -= 1
+    def monopolize(self,player_arr,player,resource_name):
+        for victim in player_arr:
+            if victim != player:
+                player.resource_cards[resource_name] += victim.resource_cards[resource_name]
+                victim.resource_cards[resource_name] = 0
     def steal_random(self,give_player,take_player):
         total = sum(take_player.resource_cards.values())
         if total == 0:

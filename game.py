@@ -190,8 +190,11 @@ class Game():
                     print(clicked)
                     if clicked !=[]:
                         print("MONOPOLY:" + clicked[0].name)
+                        board.bank.monopolize(self.player_arr,player,clicked[0].name.split()[0])
+                        not_done = False
                 if event.type == pygame.QUIT:
                     running = False
+        self.front_end.refresh(board,player)
     def play_rb(self,board,player):
         return
     def play_yop(self,board,player):
@@ -233,22 +236,22 @@ class Game():
                                     self.play_monopoly(self.game_board,player)
                                 elif clicked !=[] and clicked[0].name == "YOP" and player.development_cards["YOP"]:
                                     self.play_yop(self.game_board,player)
-                                elif clicked !=[] and clicked[0].name == "lumber trade" and player.resource_cards["Lumber"]> player.trade_resources["Lumber"]:
+                                elif clicked !=[] and clicked[0].name == "Lumber trade" and player.resource_cards["Lumber"]> player.trade_resources["Lumber"]:
                                     player.trade_resources["Lumber"] += 1
                                     self.front_end.draw_trade(board,player)
                                 elif clicked != [] and event.button == 3:
                                     player.trade_resources = {"Brick":0, "Lumber":0, "Ore":0, "Grain":0, "Wool":0}
                                     self.front_end.draw_trade(board,player)
-                                elif clicked !=[] and clicked[0].name == "brick trade" and player.resource_cards["Brick"]> player.trade_resources["Brick"]:
+                                elif clicked !=[] and clicked[0].name == "Brick trade" and player.resource_cards["Brick"]> player.trade_resources["Brick"]:
                                     player.trade_resources["Brick"] += 1
                                     self.front_end.draw_trade(board,player)
-                                elif clicked !=[] and clicked[0].name == "ore trade" and player.resource_cards["Ore"]> player.trade_resources["Ore"]:
+                                elif clicked !=[] and clicked[0].name == "Ore trade" and player.resource_cards["Ore"]> player.trade_resources["Ore"]:
                                     player.trade_resources["Ore"] += 1
                                     self.front_end.draw_trade(board,player)
-                                elif clicked !=[] and clicked[0].name == "grain trade" and player.resource_cards["Grain"]> player.trade_resources["Grain"]:
+                                elif clicked !=[] and clicked[0].name == "Grain trade" and player.resource_cards["Grain"]> player.trade_resources["Grain"]:
                                     player.trade_resources["Grain"] += 1
                                     self.front_end.draw_trade(board,player)
-                                elif clicked !=[] and clicked[0].name == "wool trade" and player.resource_cards["Wool"]> player.trade_resources["Wool"]:
+                                elif clicked !=[] and clicked[0].name == "Wool trade" and player.resource_cards["Wool"]> player.trade_resources["Wool"]:
                                     player.trade_resources["Wool"] += 1
                                     self.front_end.draw_trade(board,player)
                                 else:
