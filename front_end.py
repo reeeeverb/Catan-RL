@@ -164,7 +164,8 @@ class Front():
         pygame.draw.rect(self.screen,"aqua",[(600,0),(700,720)])
 
     def update_development_cards_display(self,board,player):
-        pygame.draw.rect(self.screen,"aqua",[(700,270),(600,430)])
+        pygame.draw.rect(self.screen,"aqua",[(700,270),(600,120)])
+
         font = pygame.font.SysFont(None, 48)
         img = font.render("Development Cards",True,"Black")
         self.screen.blit(img,(780,270))
@@ -180,11 +181,20 @@ class Front():
         img = font2.render("Road Building",True,"Blue")
         self.screen.blit(img,(800,310))
 
+        img = font.render(str(player.development_cards["RB"]),True,"Blue")
+        self.screen.blit(img,(860,330))
+
         img = font2.render("Monopoly",True,"Blue")
         self.screen.blit(img,(975,310))
 
+        img = font.render(str(player.development_cards["Monopoly"]),True,"Blue")
+        self.screen.blit(img,(1015,330))
+
         img = font2.render("Year of Plenty",True,"Blue")
         self.screen.blit(img,(1100,310))
+
+        img = font.render(str(player.development_cards["YOP"]),True,"Blue")
+        self.screen.blit(img,(1150,330))
 
         pygame.display.flip()
 
@@ -227,27 +237,7 @@ class Front():
 
         end_turn_b = sprites.End_Turn_Button(self,self.screen)
 
-        img = font.render("Development Cards",True,"Black")
-        self.screen.blit(img,(780,270))
-
-        font2 = pygame.font.SysFont(None, 30)
-
-        img = font2.render("Knight",True,"Blue")
-        self.screen.blit(img,(700,310))
-
-        img = font.render(str(player.development_cards["Knight"]),True,"Blue")
-        self.screen.blit(img,(720,330))
-
-        img = font2.render("Road Building",True,"Blue")
-        self.screen.blit(img,(800,310))
-
-        img = font2.render("Monopoly",True,"Blue")
-        self.screen.blit(img,(975,310))
-
-        img = font2.render("Year of Plenty",True,"Blue")
-        self.screen.blit(img,(1100,310))
-
-        pygame.display.flip()
+        self.update_development_cards_display(board,player)
 
         return self.turn_sprites
 
