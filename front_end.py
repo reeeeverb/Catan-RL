@@ -235,26 +235,37 @@ class Front():
             if len(sprite.name.split()) > 1 and "trade" == sprite.name.split()[1]:
                 self.turn_sprites.remove(sprite)
 
+        temp_sprites = pygame.sprite.Group()
+        sprite_list = []
+
         font = pygame.font.SysFont(None, 48)
         img = font.render("Trading",True,"Black")
         self.screen.blit(img,(870,375))
 
         lumber = sprites.Lumber_Trade(self.screen,705,450,player.trade_resources["Lumber"])
-        self.turn_sprites.add(lumber)
+        sprite_list.append(lumber)
         
         brick = sprites.Brick_Trade(self.screen,795,450,player.trade_resources["Brick"])
-        self.turn_sprites.add(brick)
+        sprite_list.append(brick)
 
         ore = sprites.Ore_Trade(self.screen,650,490,player.trade_resources["Ore"])
-        self.turn_sprites.add(ore)
+        sprite_list.append(ore)
 
         grain = sprites.Grain_Trade(self.screen,740,490,player.trade_resources["Grain"])
-        self.turn_sprites.add(grain)
+        sprite_list.append(grain)
 
         wool = sprites.Wool_Trade(self.screen,830,490,player.trade_resources["Wool"])
-        self.turn_sprites.add(wool)
-
+        sprite_list.append(wool)
         pygame.display.flip()
+
+        if not selection:
+            for sprite in sprite_list:
+                self.turn_sprites.add(sprite)
+        else:
+            for sprite in sprite_list:
+                temp_sprites.add(sprite)
+            return temp_sprites
+
         return
 
     def draw_player_turn(self,board,player):

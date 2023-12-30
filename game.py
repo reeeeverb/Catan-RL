@@ -180,10 +180,22 @@ class Game():
             player.give_largest_army()
         return
     def play_monopoly(self,board,player):
-        return
+        select_sprites = self.front_end.draw_trade(board,player,True)
+        not_done = True
+        while not_done:
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONUP:
+                    pos = pygame.mouse.get_pos()
+                    clicked = [s for s in select_sprites if s.rect.collidepoint(pos)]
+                    print(clicked)
+                    if clicked !=[]:
+                        print("MONOPOLY:" + clicked[0].name)
+                if event.type == pygame.QUIT:
+                    running = False
     def play_rb(self,board,player):
         return
     def play_yop(self,board,player):
+        self.front_end.draw_trade(board,player,True)
         return
     def take_turn(self):
         game_over = False

@@ -180,7 +180,8 @@ class Development_Cards():
     def reset_stack(a = None):
         if a == None:
             a = self
-        a.card_stack = 14*["Knight"]+5*["VP"]+2*["RB"]+2*["Monopoly"]+2*["YOP"]
+        #a.card_stack = 14*["Knight"]+5*["VP"]+2*["RB"]+2*["Monopoly"]+2*["YOP"]
+        a.card_stack = 1*["Knight"]+1*["VP"]+1*["RB"]+50*["Monopoly"]+1*["YOP"]
         a.used_stack = []
         a.shuffle()
     def shuffle(a = None):
