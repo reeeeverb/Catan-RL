@@ -169,6 +169,25 @@ class Game():
         print(player.development_cards)
         self.front_end.update_development_cards_display(board,player)
         self.front_end.refresh(board,self.player_arr,player)
+    def trade_submitted(player,trading_entity):
+        rate = 4
+        if "3" in player.harbors_owned:
+            rate = 3
+        if trading_entity == "Bank":
+            if sum(player.trade_resources.values()) == rate and sum(player.trade_take_resources.values()) ==1:
+                for key in self.trade_resources.keys():
+                    if player.trade_resources[key] == rate:
+                        self.game_board.bank.take_resource(key,player)
+                        self.game_board.bank.give_resource(key,player)
+            else if sum(player.trade_resources.values()) == 2:#and (sum(player.trade_take_resources.values()) ==1):  
+                for harbor in player.harbors_owned:
+                    if harbor == "3":
+                        break;
+                    if player.trade_resources[harbor] == 2:
+                        self.game_board.bank.take_resource(key,player)
+                        self.game_board.bank.give_resource(key,player)
+
+
     def play_knight(self,board,player):
         move_robber(board,player,True)
         player.played_knights += 1
@@ -293,8 +312,9 @@ class Game():
                                         player.trade_take_resources["Wool"] +=1
                                     self.front_end.draw_trade(board,self.player_arr,player)
                                 elif clicked !=[] and len(clicked[0].name.split()) == 3 and clicked[0].name.split()[2] == "label":
-                                    print("hit")
                                     self.front_end.trade_label_change(self.player_arr,player,clicked[0])
+                                elif clicked !=[] and clicked[0].name == "submit trade" and self.front_end.selected_trade !=None and sum(player.trade_resources.values()) > 0 and sum(player.trade_take_resources.values()) > 0:
+                                    self.trade_submitted(player,self.front_end.selected_trade)
                                 else:
                                     print("Invalid Location")
                             if event.type == pygame.QUIT:

@@ -228,6 +228,13 @@ class Bank():
             return False
         self.resource_cards[resource] -= 1
         return True
+    def take_resource(self,resource,player):
+        if player.resource_cards[resource] > 0:
+            player.resource_cards[resource] -= 1
+        else:
+            return False
+        self.resource_cards[resource] += 1
+        return True
     def monopolize(self,player_arr,player,resource_name):
         for victim in player_arr:
             if victim != player:

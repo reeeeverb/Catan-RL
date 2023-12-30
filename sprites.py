@@ -263,6 +263,19 @@ class Development_Card_Button(pygame.sprite.Sprite):
         h= 75
         self.rect = pygame.draw.rect(screen,"aqua",[(x,y),(w,h)])
 
+class Submit_Trade_Button(pygame.sprite.Sprite):
+    def __init__(self,screen):
+        super(Submit_Trade_Button,self).__init__()
+        self.name = "submit trade"
+        x = 900 
+        y = 625
+        w = 170
+        h = 70
+        self.rect = pygame.draw.rect(screen,"black",[(x,y),(w,h)],5)
+        font = pygame.font.SysFont(None, 32)
+        img = font.render("Submit Trade",True,"black")
+        screen.blit(img,(x+15,y+25))
+
 class End_Turn_Button(pygame.sprite.Sprite):
     def __init__(self,front_end,screen):
         super(End_Turn_Button,self).__init__()
@@ -273,6 +286,6 @@ class End_Turn_Button(pygame.sprite.Sprite):
         h = 70
         self.rect = pygame.draw.rect(screen,"black",[(x,y),(w,h)])
         font = pygame.font.SysFont(None, 48)
-        img = font.render("End Turn",True,"white")
+        img = font.render("End Turn",True,"aqua")
         screen.blit(img,(x+5,y+18))
         front_end.turn_sprites.add(self)

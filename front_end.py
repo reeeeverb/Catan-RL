@@ -280,14 +280,6 @@ class Front():
 
         if not selection:
             self.trade_label_change(player_arr,player,self.selected_trade)
-            #offset = 0
-            #for temp in player_arr:
-            #    if temp != player:
-            #        label = sprites.Trade_Label(self.screen,temp.name,offset)
-            #        sprite_list.append(label)
-            #        offset +=100
-            #label = sprites.Trade_Label(self.screen,"Bank",offset)
-            #sprite_list.append(label)
 
             lumber = sprites.Lumber_Trade(self.screen,1005,450,player.trade_take_resources["Lumber"])
             sprite_list.append(lumber)
@@ -303,6 +295,9 @@ class Front():
 
             wool = sprites.Wool_Trade(self.screen,1130,490,player.trade_take_resources["Wool"])
             sprite_list.append(wool)
+
+            submit = sprites.Submit_Trade_Button(self.screen)
+            sprite_list.append(submit)
 
         pygame.display.flip()
 
