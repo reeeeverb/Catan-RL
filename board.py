@@ -181,7 +181,7 @@ class Development_Cards():
         if a == None:
             a = self
         #a.card_stack = 14*["Knight"]+5*["VP"]+2*["RB"]+2*["Monopoly"]+2*["YOP"]
-        a.card_stack = 1*["Knight"]+1*["VP"]+1*["RB"]+50*["Monopoly"]+1*["YOP"]
+        a.card_stack = 1*["Knight"]+1*["VP"]+1*["RB"]+1*["Monopoly"]+50*["YOP"]
         a.used_stack = []
         a.shuffle()
     def shuffle(a = None):
@@ -199,8 +199,8 @@ class Development_Cards():
             else:
                 return None
         return(a.card_stack.pop())
-    def card_used(card):
-        if card not in ["KNIGHT", "RB", "Monopoly"]:
+    def card_used(self,card):
+        if card not in ["Knight", "RB", "Monopoly", "YOP"]:
             print("INVALID CARD")
         self.used_stack.append(card)
 
@@ -224,7 +224,10 @@ class Bank():
     def give_resource(self,resource,player):
         if self.resource_cards[resource] > 0:
             player.resource_cards[resource] += 1
+        else:
+            return False
         self.resource_cards[resource] -= 1
+        return True
     def monopolize(self,player_arr,player,resource_name):
         for victim in player_arr:
             if victim != player:

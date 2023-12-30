@@ -180,6 +180,9 @@ class Game():
             player.give_largest_army()
         return
     def play_monopoly(self,board,player):
+        player.development_cards["Monopoly"] -= 1
+        player.craft_count["Development_Card"] -= 1
+        self.game_deck.card_used("Monopoly")
         select_sprites = self.front_end.draw_trade(board,player,True)
         not_done = True
         while not_done:
@@ -198,7 +201,26 @@ class Game():
     def play_rb(self,board,player):
         return
     def play_yop(self,board,player):
-        self.front_end.draw_trade(board,player,True)
+        player.development_cards["YOP"] -= 1
+        player.craft_count["Development_Card"] -= 1
+        self.game_deck.card_used("YOP")
+        select_sprites = self.front_end.draw_trade(board,player,True)
+        count = 0
+        not_done = True
+        while not_done:
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONUP:
+                    pos = pygame.mouse.get_pos()
+                    clicked = [s for s in select_sprites if s.rect.collidepoint(pos)]
+                    if clicked !=[]:
+                        print("YOP:" + clicked[0].name)
+                        if board.bank.give_resource(clicked[0].name.split()[0],player):
+                            count += 1
+                            self.front_end.refresh(board,player)
+                        if count == 2:
+                            not_done = False
+                if event.type == pygame.QUIT:
+                    running = False
         return
     def take_turn(self):
         game_over = False
