@@ -15,12 +15,10 @@ class Player():
         self.possible_road = []
         self.played_knights = 0
         self.largest_army = False
-    @property
-    def victory_points(self):
-        return self._victory_points
-    @victory_points.setter
-    def victory_points(self,value):
-        print(value)
+    def adjust_victory_points(self,value):
+        player._victory_points += value
+        if player._victory_points > 9:
+            print("Game Over")
     def set_info(self,name,color,human):
         self.name = name
         self.color = color
@@ -29,8 +27,12 @@ class Player():
         return
     def give_largest_army(self):
         if self.largest_army == False:
-            self.victory_point += 2
+            self.adjust_victory_points(2)
             self.largest_army = True
+    def remove_largest_army(self):
+        if self.largest_army == True:
+            self.adjust_victory_points(-2)
+            self.largest_army = False
     def place_settlement(self,board,loc,pregame=False):
         if board.legal_placement(loc,self,pregame)[0]:
             board.place_settlement(loc,self,pregame)

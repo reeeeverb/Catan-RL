@@ -224,9 +224,6 @@ class Game():
                             if event.type == pygame.QUIT:
                                 running = False
                     self.front_end.clear_turn()
-                    
-                if player.victory_points >= 10:
-                    game_over = True
 
 def main():
     game = Game()
