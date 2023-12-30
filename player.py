@@ -17,6 +17,8 @@ class Player():
         self.name = name
         self.color = color
         self.human = human
+    def other_player(self):
+        return
     def place_settlement(self,board,loc,pregame=False):
         if board.legal_placement(loc,self,pregame)[0]:
             board.place_settlement(loc,self,pregame)

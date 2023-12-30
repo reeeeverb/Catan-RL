@@ -22,6 +22,7 @@ class Game():
         self.player_arr = [self.player1,self.player2,self.player3]
         self.dice = board.Dice()
         self.front_end = front_end.Front()
+        self.robber_tile = self.game_board.terrains.index("Desert")
         self.pregame_setup()
         self.board_corners = []
         self.board_edges = []
@@ -75,6 +76,12 @@ class Game():
                     if event.type == pygame.QUIT:
                         running = False
             self.front_end.refresh(self.game_board)
+    def play_robber(self,board,player,knight_card=False):        
+        if not knight_card:
+            for other_player in player_arr:
+                if sum(other_player.resource_cards.values()) > 7:
+                    other_player.discard_half()
+        ## Move Robber
     def craft_settlement_clicked(self,player,board):
         self.front_end.show_legal_settlement_loc(board,player)
         not_done = True
@@ -139,6 +146,8 @@ class Game():
                 print("A {} was rolled!".format(roll_result))
                 self.game_board.bank.dice_rolled(self.game_board.turn_tree[roll_result])
                 if player.human:
+                    if roll_result == 7:
+                        self.move_robber(board,player)
                     turn_ended = False
                     sprites = self.front_end.draw_player_turn(self.game_board,player)
                     while not turn_ended:
