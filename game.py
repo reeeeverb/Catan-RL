@@ -76,11 +76,24 @@ class Game():
                     if event.type == pygame.QUIT:
                         running = False
             self.front_end.refresh(self.game_board)
-    def play_robber(self,board,player,knight_card=False):        
+    def move_robber(self,board,player,knight_card=False):        
         if not knight_card:
-            for other_player in player_arr:
+            for other_player in self.player_arr:
                 if sum(other_player.resource_cards.values()) > 7:
                     other_player.discard_half()
+        not_done = True
+        while not_done:
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONUP:
+                    pos = pygame.mouse.get_pos()
+                    clicked = [s for s in self.front_end.tile_sprites if s.rect.collidepoint(pos)]
+                    if clicked !=[]:
+                        index = clicked[0].index
+                        print(index)
+                    else:
+                        print("No")
+                if event.type == pygame.QUIT:
+                    not_done = False
         ## Move Robber
     def craft_settlement_clicked(self,player,board):
         self.front_end.show_legal_settlement_loc(board,player)
