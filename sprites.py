@@ -18,9 +18,9 @@ class Lumber_RC(pygame.sprite.Sprite):
         self.name = "lumber"
         font = pygame.font.SysFont(None, 48)
         self.surf = pygame.transform.scale_by(pygame.image.load("imgs/lumber.png").convert(),.125)
-        screen.blit(self.surf,(600,30))
+        screen.blit(self.surf,(590,30))
         img = font.render(str(lumber_count),True,"black")
-        screen.blit(img,(720,60))
+        screen.blit(img,(705,60))
         self.rect = self.surf.get_rect()
         self.rect.x = 600
         self.rect.y = 30
