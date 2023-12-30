@@ -166,6 +166,18 @@ class Front():
     def update_development_cards_display(self,board,player):
         pygame.draw.rect(self.screen,"aqua",[(700,270),(600,120)])
 
+        knight = sprites.Development_Card_Button(self,self.screen,"Knight",0)
+        self.turn_sprites.add(knight)
+
+        rb = sprites.Development_Card_Button(self,self.screen,"RB",135)
+        self.turn_sprites.add(rb)
+
+        mono = sprites.Development_Card_Button(self,self.screen,"Monopoly",280)
+        self.turn_sprites.add(mono)
+
+        yop = sprites.Development_Card_Button(self,self.screen,"YOP",430)
+        self.turn_sprites.add(yop)
+
         font = pygame.font.SysFont(None, 48)
         img = font.render("Development Cards",True,"Black")
         self.screen.blit(img,(780,270))

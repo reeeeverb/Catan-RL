@@ -119,6 +119,16 @@ class Development_CB(pygame.sprite.Sprite):
         rect.height -=5
         pygame.draw.rect(screen,"blue",rect)
 
+class Development_Card_Button(pygame.sprite.Sprite):
+    def __init__(self,front_end,screen,name,offset):
+        super(Development_Card_Button,self).__init__()
+        self.name = name
+        x= 700 + offset
+        y= 310
+        w= 75
+        h= 75
+        self.rect = pygame.draw.rect(screen,"aqua",[(x,y),(w,h)])
+
 class End_Turn_Button(pygame.sprite.Sprite):
     def __init__(self,front_end,screen):
         super(End_Turn_Button,self).__init__()
