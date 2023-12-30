@@ -121,13 +121,16 @@ class Wool_Trade(pygame.sprite.Sprite):
         self.rect.width += 10
 
 class Trade_Label(pygame.sprite.Sprite):
-    def __init__(self, screen, name, offset):
+    def __init__(self, screen, name, offset,selected=False):
         super(Trade_Label, self).__init__()
-        self.name = name + "trade" +"label"
+        self.name = name + " trade " +"label"
         x = 970
         y = 425
         font = pygame.font.SysFont(None, 30)
-        img = font.render(name,True,"black")
+        if selected:
+            img = font.render(name,True,"blue")
+        else:
+            img = font.render(name,True,"black")
         screen.blit(img,(x+offset,y))
         self.rect = pygame.Rect(x+offset,y,100,50)
 

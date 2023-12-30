@@ -23,6 +23,7 @@ class Front():
         self.turn_sprites = pygame.sprite.Group()
         self.steal_sprites = pygame.sprite.Group()
         self.last_roll = (0,0)
+        self.selected_trade = None
 
     def draw_tile(self,x,y,terrain,index,n):
         screen = self.screen
@@ -228,6 +229,24 @@ class Front():
 
         pygame.display.flip()
 
+    def trade_label_change(self,player_arr,player,new):
+        pygame.draw.rect(self.screen,"aqua",[(970,425),(300,25)])
+        for sprite in self.turn_sprites:
+            if len(sprite.name.split()) > 2 and "label" == sprite.name.split()[2]:
+                self.turn_sprites.remove(sprite)
+        offset = 0
+        person_name = (new.name.split()[0])
+        for temp in player_arr:
+            if temp != player:
+                selected = (person_name == temp.name)
+                label = sprites.Trade_Label(self.screen,temp.name,offset,selected)
+                self.turn_sprites.add(label)
+                offset +=100
+        selected = person_name == "Bank"
+        label = sprites.Trade_Label(self.screen,"Bank",offset,selected)
+        self.turn_sprites.add(sprite)
+        self.selected_trade = person_name
+        pygame.display.flip()
     def draw_trade(self,board,player_arr,player,selection=False):
 
         pygame.draw.rect(self.screen,"aqua",[(650,450),(650,150)])
@@ -257,16 +276,33 @@ class Front():
         wool = sprites.Wool_Trade(self.screen,830,490,player.trade_resources["Wool"])
         sprite_list.append(wool)
 
-        offset = 0
-        for temp in player_arr:
-            if temp != player:
-                label = sprites.Trade_Label(self.screen,temp.name,offset)
-                sprite_list.append(label)
-                offset +=100
-        label = sprites.Trade_Label(self.screen,"Bank",offset)
-        sprite_list.append(label)
+        if not selection:
+            offset = 0
+            for temp in player_arr:
+                if temp != player:
+                    label = sprites.Trade_Label(self.screen,temp.name,offset)
+                    sprite_list.append(label)
+                    offset +=100
+            label = sprites.Trade_Label(self.screen,"Bank",offset)
+            sprite_list.append(label)
+
+            lumber = sprites.Lumber_Trade(self.screen,1005,450,player.trade_resources["Lumber"])
+            sprite_list.append(lumber)
+            
+            brick = sprites.Brick_Trade(self.screen,1095,450,player.trade_resources["Brick"])
+            sprite_list.append(brick)
+
+            ore = sprites.Ore_Trade(self.screen,950,490,player.trade_resources["Ore"])
+            sprite_list.append(ore)
+
+            grain = sprites.Grain_Trade(self.screen,1040,490,player.trade_resources["Grain"])
+            sprite_list.append(grain)
+
+            wool = sprites.Wool_Trade(self.screen,1130,490,player.trade_resources["Wool"])
+            sprite_list.append(wool)
 
         pygame.display.flip()
+
 
         if not selection:
             for sprite in sprite_list:

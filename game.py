@@ -258,11 +258,14 @@ class Game():
                                     self.play_monopoly(self.game_board,player)
                                 elif clicked !=[] and clicked[0].name == "YOP" and player.development_cards["YOP"]:
                                     self.play_yop(self.game_board,player)
-                                elif clicked !=[] and clicked[0].name == "Lumber trade" and player.resource_cards["Lumber"]> player.trade_resources["Lumber"]:
-                                    player.trade_resources["Lumber"] += 1
-                                    self.front_end.draw_trade(board,self.player_arr,player)
                                 elif clicked != [] and event.button == 3:
                                     player.trade_resources = {"Brick":0, "Lumber":0, "Ore":0, "Grain":0, "Wool":0}
+                                    self.front_end.draw_trade(board,self.player_arr,player)
+                                elif clicked !=[] and clicked[0].name == "Lumber trade":
+                                    if clicked[0].rect.x < 950 and player.resource_cards["Lumber"]> player.trade_resources["Lumber"]:
+                                        player.trade_resources["Lumber"] += 1
+                                    else:
+                                        player.trade_take_resources["Lumber"] += 1
                                     self.front_end.draw_trade(board,self.player_arr,player)
                                 elif clicked !=[] and clicked[0].name == "Brick trade" and player.resource_cards["Brick"]> player.trade_resources["Brick"]:
                                     player.trade_resources["Brick"] += 1
@@ -276,6 +279,9 @@ class Game():
                                 elif clicked !=[] and clicked[0].name == "Wool trade" and player.resource_cards["Wool"]> player.trade_resources["Wool"]:
                                     player.trade_resources["Wool"] += 1
                                     self.front_end.draw_trade(board,self.player_arr,player)
+                                elif clicked !=[] and len(clicked[0].name.split()) == 3 and clicked[0].name.split()[2] == "label":
+                                    print("hit")
+                                    self.front_end.trade_label_change(self.player_arr,player,clicked[0])
                                 else:
                                     print("Invalid Location")
                             if event.type == pygame.QUIT:
