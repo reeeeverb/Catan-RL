@@ -228,24 +228,30 @@ class Front():
 
         pygame.display.flip()
 
-    def draw_trade(self,board,player):
+    def draw_trade(self,board,player,selection=False):
+
+        pygame.draw.rect(self.screen,"aqua",[(650,450),(650,150)])
+        for sprite in self.turn_sprites:
+            if len(sprite.name.split()) > 1 and "trade" == sprite.name.split()[1]:
+                self.turn_sprites.remove(sprite)
+
         font = pygame.font.SysFont(None, 48)
         img = font.render("Trading",True,"Black")
         self.screen.blit(img,(870,375))
 
-        lumber = sprites.Lumber_Trade(self.screen,705,450,0)
+        lumber = sprites.Lumber_Trade(self.screen,705,450,player.trade_resources["Lumber"])
         self.turn_sprites.add(lumber)
         
-        brick = sprites.Brick_Trade(self.screen,795,450,0)
+        brick = sprites.Brick_Trade(self.screen,795,450,player.trade_resources["Brick"])
         self.turn_sprites.add(brick)
 
-        ore = sprites.Ore_Trade(self.screen,650,490,0)
+        ore = sprites.Ore_Trade(self.screen,650,490,player.trade_resources["Ore"])
         self.turn_sprites.add(ore)
 
-        grain = sprites.Grain_Trade(self.screen,740,490,0)
+        grain = sprites.Grain_Trade(self.screen,740,490,player.trade_resources["Grain"])
         self.turn_sprites.add(grain)
 
-        wool = sprites.Wool_Trade(self.screen,830,490,0)
+        wool = sprites.Wool_Trade(self.screen,830,490,player.trade_resources["Wool"])
         self.turn_sprites.add(wool)
 
         pygame.display.flip()
