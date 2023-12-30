@@ -29,7 +29,6 @@ class Dice(pygame.sprite.Sprite):
             self.surf = pygame.transform.scale_by(pygame.image.load("imgs/dice/six.png").convert(),.125)
         screen.blit(self.surf,(offset,0))
 
-
 class Steal_From(pygame.sprite.Sprite):
     def __init__(self, board, screen, stealable):
         super(Steal_From, self).__init__()

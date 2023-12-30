@@ -11,10 +11,16 @@ class Player():
         self.name = "None"
         self.color = None
         self.human = True
-        self.victory_points = 0
+        self._victory_points = 0
         self.possible_road = []
         self.played_knights = 0
         self.largest_army = False
+    @property
+    def victory_points(self):
+        return self._victory_points
+    @victory_points.setter
+    def victory_points(self,value):
+        print(value)
     def set_info(self,name,color,human):
         self.name = name
         self.color = color
@@ -22,7 +28,7 @@ class Player():
     def discard_half(self):
         return
     def give_largest_army(self):
-        if self.largest_army = False
+        if self.largest_army == False:
             self.victory_point += 2
             self.largest_army = True
     def place_settlement(self,board,loc,pregame=False):

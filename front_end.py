@@ -228,6 +228,15 @@ class Front():
 
         pygame.display.flip()
 
+    def draw_trade(self,board,player):
+        font = pygame.font.SysFont(None, 48)
+        img = font.render("Trading",True,"Black")
+        self.screen.blit(img,(870,375))
+        font2 = pygame.font.SysFont(None, 30)
+        img = font2.render("Wheat",True,"Blue")
+        pygame.display.flip()
+        return
+
     def draw_player_turn(self,board,player):
         font = pygame.font.SysFont(None, 48)
 
@@ -268,6 +277,8 @@ class Front():
         end_turn_b = sprites.End_Turn_Button(self,self.screen)
 
         self.update_development_cards_display(board,player)
+
+        self.draw_trade(board,player)
 
         return self.turn_sprites
 
