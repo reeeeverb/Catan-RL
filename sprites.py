@@ -1,13 +1,16 @@
 import pygame
 
 class Terrain_Tile(pygame.sprite.Sprite):
-    def __init__(self, screen, terrain,x,y,index):
+    def __init__(self, screen, terrain,x,y,index,number):
         super(Terrain_Tile, self).__init__()
+        font = pygame.font.SysFont(None, 48)
         self.index = index
         terrain_to_color = {"Mountains":"gray","Hills":"0xB22222","Forest":"0x023020","Fields":"0xcac407","Pasture":"0x5adc14","Desert":"navajowhite"}
         color = terrain_to_color[terrain]
         pygame.draw.polygon(screen,color,[(x,y),(x-50,y-25),(x-50,y-75),(x,y-100),(x+50,y-75),(x+50,y-25)])
         self.rect = pygame.draw.polygon(screen,"black",[(x,y),(x-50,y-25),(x-50,y-75),(x,y-100),(x+50,y-75),(x+50,y-25)],4)
+        img = font.render(str(number),True,"aqua")
+        screen.blit(img,(x-10,y-65))
 
 class Lumber_RC(pygame.sprite.Sprite):
     def __init__(self, screen, lumber_count):
