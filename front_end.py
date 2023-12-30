@@ -22,6 +22,7 @@ class Front():
         self.tile_sprites = pygame.sprite.Group()
         self.turn_sprites = pygame.sprite.Group()
         self.steal_sprites = pygame.sprite.Group()
+        self.last_roll = (0,0)
 
     def draw_tile(self,x,y,terrain,index,n):
         screen = self.screen
@@ -173,6 +174,12 @@ class Front():
     def clear_turn(self):
         self.turn_sprites.empty()
         pygame.draw.rect(self.screen,"aqua",[(600,0),(700,720)])
+
+    def draw_dice(self,roll):
+        self.last_roll = roll
+        dice = sprites.Dice(self,self.screen,roll[0])
+        dice = sprites.Dice(self,self.screen,roll[1],75)
+        pygame.display.flip()
 
     def update_development_cards_display(self,board,player):
         pygame.draw.rect(self.screen,"aqua",[(700,270),(600,120)])

@@ -12,6 +12,24 @@ class Terrain_Tile(pygame.sprite.Sprite):
         img = font.render(str(number),True,"aqua")
         screen.blit(img,(x-10,y-65))
 
+class Dice(pygame.sprite.Sprite):
+    def __init__(self, board, screen, roll, offset=0):
+        super(Dice, self).__init__()
+        if roll == 1:
+            self.surf = pygame.transform.scale_by(pygame.image.load("imgs/dice/one.png").convert(),.125)
+        if roll == 2:
+            self.surf = pygame.transform.scale_by(pygame.image.load("imgs/dice/two.png").convert(),.125)
+        if roll == 3:
+            self.surf = pygame.transform.scale_by(pygame.image.load("imgs/dice/three.png").convert(),.125)
+        if roll == 4:
+            self.surf = pygame.transform.scale_by(pygame.image.load("imgs/dice/four.png").convert(),.125)
+        if roll == 5:
+            self.surf = pygame.transform.scale_by(pygame.image.load("imgs/dice/five.png").convert(),.125)
+        if roll == 6:
+            self.surf = pygame.transform.scale_by(pygame.image.load("imgs/dice/six.png").convert(),.125)
+        screen.blit(self.surf,(offset,0))
+
+
 class Steal_From(pygame.sprite.Sprite):
     def __init__(self, board, screen, stealable):
         super(Steal_From, self).__init__()

@@ -8,13 +8,13 @@
 - ~~harbors~~
 - ~~bank~~
 - ~~turn tree~~
-- ~resource cards~
-- turns
-- robber
+- ~~resource cards~~
+- ~~turns~~
+- ~~robber~~
 - usage of development cards 
 - bank and maritime trades
 - interperson trading
-- building
+- ~~building~~
 - victory points tracker
 - longest road and largest army cards
 

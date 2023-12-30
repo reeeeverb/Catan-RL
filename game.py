@@ -166,6 +166,7 @@ class Game():
         self.game_board.bank.craft("Development_Card",player)
         print(player.development_cards)
         self.front_end.update_development_cards_display(board,player)
+        self.front_end.refresh(board,player)
     def play_knight(self,board,player):
         return
     def play_monopoly(self,board,player):
@@ -178,14 +179,15 @@ class Game():
         game_over = False
         while not game_over:
             for player in self.player_arr:
-                roll_result = self.dice.roll_two()
+                dice_one, dice_two = self.dice.roll_two()
+                roll_result = dice_one+dice_two
                 print("A {} was rolled!".format(roll_result))
+                self.front_end.draw_dice((dice_one,dice_two))
                 self.game_board.bank.dice_rolled(self.game_board,self.game_board.turn_tree[roll_result])
                 if player.human:
                     if roll_result == 7:
                         self.move_robber(self.game_board,player)
                     turn_ended = False
-                    print("RobberTile" + str(self.game_board.robber_tile))
                     sprites = self.front_end.draw_player_turn(self.game_board,player)
                     while not turn_ended:
                         for event in pygame.event.get():

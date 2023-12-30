@@ -263,7 +263,7 @@ class Dice():
     def roll_one(self):
         return random.randint(1,6)
     def roll_two(self):
-        return random.randint(1,6) + random.randint(1,6)
+        return random.randint(1,6),random.randint(1,6)
 
 
 
