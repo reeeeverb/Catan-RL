@@ -19,15 +19,13 @@ class Front():
         self.edges_coords=[]
         self.settlement_sprites = pygame.sprite.Group()
         self.settlement_bg_sprites = pygame.sprite.Group()
+        self.tile_sprites = pygame.sprite.Group()
         self.turn_sprites = pygame.sprite.Group()
 
     def draw_tile(self,x,y,terrain):
         screen = self.screen
-        terrain_to_color = {"Mountains":"gray","Hills":"0xB22222","Forest":"0x023020","Fields":"0xcac407","Pasture":"0x5adc14","Desert":"navajowhite"}
-        color = terrain_to_color[terrain]
-        pygame.draw.polygon(screen,color,[(x,y),(x-50,y-25),(x-50,y-75),(x,y-100),(x+50,y-75),(x+50,y-25)])
-        pygame.draw.polygon(screen,"black",[(x,y),(x-50,y-25),(x-50,y-75),(x,y-100),(x+50,y-75),(x+50,y-25)],4)
-        pygame.display.flip()
+        tile = sprites.Terrain_Tile(screen,terrain,x,y)
+        self.tile_sprites.add(tile)
 
     def draw_board(self,x,y,board):
         board.pygame_coords = (x,y) 

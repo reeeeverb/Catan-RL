@@ -1,5 +1,13 @@
 import pygame
 
+class Terrain_Tile(pygame.sprite.Sprite):
+    def __init__(self, screen, terrain,x,y):
+        super(Terrain_Tile, self).__init__()
+        terrain_to_color = {"Mountains":"gray","Hills":"0xB22222","Forest":"0x023020","Fields":"0xcac407","Pasture":"0x5adc14","Desert":"navajowhite"}
+        color = terrain_to_color[terrain]
+        pygame.draw.polygon(screen,color,[(x,y),(x-50,y-25),(x-50,y-75),(x,y-100),(x+50,y-75),(x+50,y-25)])
+        pygame.draw.polygon(screen,"black",[(x,y),(x-50,y-25),(x-50,y-75),(x,y-100),(x+50,y-75),(x+50,y-25)],4)
+
 class Lumber_RC(pygame.sprite.Sprite):
     def __init__(self, screen, lumber_count):
         super(Lumber_RC, self).__init__()
