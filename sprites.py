@@ -50,7 +50,75 @@ class Person_Label(pygame.sprite.Sprite):
         screen.blit(img,(110+offset,600))
         self.rect = pygame.Rect(110+offset,600,175,50)
 
+class Lumber_Trade(pygame.sprite.Sprite):
+    def __init__(self, screen, x, y, lumber_count):
+        super(Lumber_Trade, self).__init__()
+        self.name = "lumber trade"
+        font = pygame.font.SysFont(None, 30)
+        self.surf = pygame.transform.scale_by(pygame.image.load("imgs/lumber.png").convert(),.05)
+        screen.blit(self.surf,(x,y))
+        img = font.render(str(lumber_count),True,"black")
+        screen.blit(img,(x+50,y+10))
+        self.rect = self.surf.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.rect.width += 10
 
+class Brick_Trade(pygame.sprite.Sprite):
+    def __init__(self, screen, x, y, brick_count):
+        super(Brick_Trade, self).__init__()
+        self.name = "brick trade"
+        font = pygame.font.SysFont(None, 30)
+        self.surf = pygame.transform.scale_by(pygame.image.load("imgs/brick.png").convert(),.07)
+        screen.blit(self.surf,(x,y-5))
+        img = font.render(str(brick_count),True,"black")
+        screen.blit(img,(x+50,y+10))
+        self.rect = self.surf.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.rect.width += 10
+
+class Ore_Trade(pygame.sprite.Sprite):
+    def __init__(self, screen, x, y, ore_count):
+        super(Ore_Trade, self).__init__()
+        self.name = "ore trade"
+        font = pygame.font.SysFont(None, 30)
+        self.surf = pygame.transform.scale_by(pygame.image.load("imgs/ore.png").convert(),.07)
+        screen.blit(self.surf,(x-10,y))
+        img = font.render(str(ore_count),True,"black")
+        screen.blit(img,(x+50,y+15))
+        self.rect = self.surf.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.rect.width += 10
+
+class Grain_Trade(pygame.sprite.Sprite):
+    def __init__(self, screen, x, y, grain_count):
+        super(Grain_Trade, self).__init__()
+        self.name = "grain trade"
+        font = pygame.font.SysFont(None, 30)
+        self.surf = pygame.transform.scale_by(pygame.image.load("imgs/grain.png").convert(),.08)
+        screen.blit(self.surf,(x-5,y-5))
+        img = font.render(str(grain_count),True,"black")
+        screen.blit(img,(x+50,y+15))
+        self.rect = self.surf.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.rect.width += 10
+
+class Wool_Trade(pygame.sprite.Sprite):
+    def __init__(self, screen, x, y, wool_count):
+        super(Wool_Trade, self).__init__()
+        self.name = "wool trade"
+        font = pygame.font.SysFont(None, 30)
+        self.surf = pygame.transform.scale_by(pygame.image.load("imgs/sheep.png").convert(),.15)
+        screen.blit(self.surf,(x+10,y+10))
+        img = font.render(str(wool_count),True,"black")
+        screen.blit(img,(x+50,y+15))
+        self.rect = self.surf.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.rect.width += 10
 
 class Lumber_RC(pygame.sprite.Sprite):
     def __init__(self, screen, lumber_count):

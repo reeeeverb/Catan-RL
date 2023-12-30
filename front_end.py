@@ -232,8 +232,22 @@ class Front():
         font = pygame.font.SysFont(None, 48)
         img = font.render("Trading",True,"Black")
         self.screen.blit(img,(870,375))
-        font2 = pygame.font.SysFont(None, 30)
-        img = font2.render("Wheat",True,"Blue")
+
+        lumber = sprites.Lumber_Trade(self.screen,705,450,0)
+        self.turn_sprites.add(lumber)
+        
+        brick = sprites.Brick_Trade(self.screen,795,450,0)
+        self.turn_sprites.add(brick)
+
+        ore = sprites.Ore_Trade(self.screen,650,490,0)
+        self.turn_sprites.add(ore)
+
+        grain = sprites.Grain_Trade(self.screen,740,490,0)
+        self.turn_sprites.add(grain)
+
+        wool = sprites.Wool_Trade(self.screen,830,490,0)
+        self.turn_sprites.add(wool)
+
         pygame.display.flip()
         return
 

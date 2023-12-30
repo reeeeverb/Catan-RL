@@ -173,6 +173,8 @@ class Game():
         move_robber(board,player,True)
         player.played_knights += 1
         if player.played_knights > self.largest_army[0]:
+            if self.largest_army[1] != None:
+                self.largest_army[1].remove_largest_army()
             self.largest_army[1] = player
             self.largest_army[0] = player.played_knights
             player.give_largest_army()
