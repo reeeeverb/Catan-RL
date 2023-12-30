@@ -137,6 +137,16 @@ class Front():
         self.roads[index] = player
         pygame.display.flip()
 
+    def show_legal_settlement_loc(self,board,player):
+        for index in range(len(board.corner_placeable)):
+            if board.corner_placeable[index] == True:
+                old_rect = self.corners[index]
+                c = old_rect.center
+                new_rect = pygame.draw.circle(self.screen,player.color,(c[0],c[1]),10)
+                self.corners[index] = new_rect
+        pygame.display.flip() 
+
+
     def refresh(self,board):
         for index in range(len(board.road_locations)):
             if board.road_locations[index] != None:

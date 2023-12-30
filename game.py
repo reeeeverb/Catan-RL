@@ -76,6 +76,8 @@ class Game():
                         running = False
             self.front_end.refresh(self.game_board)
     def craft_settlement_clicked(self,player,board):
+        self.front_end.show_legal_settlement_loc(board,player)
+        time.sleep(10000)
         return
     def take_turn(self):
         game_over = False
