@@ -92,7 +92,27 @@ class Game():
                                 self.front_end.refresh(board)
                                 return True
                     else:
-                        print("Invalid Location")
+                        self.front_end.refresh(board)
+                        return False
+                if event.type == pygame.QUIT:
+                    running = False
+        return
+    def craft_road_clicked(self,player,board):
+        not_done = True
+        while not_done:
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONUP:
+                    pos = pygame.mouse.get_pos()
+                    clicked = [s for s in self.front_end.edges if s.collidepoint(pos)]
+                    print(clicked)
+                    if clicked !=[]:
+                        index = self.front_end.edges.index(clicked[0])
+                        if board.legal_placement(index,player):
+                            if player.place_road(board,int(index)):
+                                self.front_end.refresh(board)
+                                return True
+                    else:
+                        self.front_end.refresh(board)
                         return False
                 if event.type == pygame.QUIT:
                     running = False
@@ -115,8 +135,10 @@ class Game():
                                 print(clicked)
                                 if clicked !=[] and clicked[0].name == "end turn":
                                     turn_ended = True
-                                elif clicked !=[] and clicked[0].name == "settlement":
+                                elif clicked !=[] and clicked[0].name == "settlement" and self.game_board.bank.can_afford("Settlement",player)[0]:
                                     self.craft_settlement_clicked(player, self.game_board)
+                                elif clicked !=[] and clicked[0].name == "road" and self.game_board.bank.can_afford("Road",player)[0]:
+                                    self.craft_road_clicked(player, self.game_board)
                                 else:
                                     print("Invalid Location")
                             if event.type == pygame.QUIT:

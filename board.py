@@ -13,7 +13,7 @@ class Board():
         self.road_locations = 72*[None]
         self.settlement_locations = 54*[None]
         self.clear_corners = 54*[True]
-        self.road_corners = 54*[[] for i in range(54)]
+        self.road_corners = 54*[[]]
         self.harbor_ownership = 9*[False]
         self.bank = Bank()
         self.turn_tree = 13*[[] for i in range(13)]

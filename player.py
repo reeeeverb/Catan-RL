@@ -12,6 +12,7 @@ class Player():
         self.color = None
         self.human = True
         self.victory_points = 0
+        self.possible_road = []
     def set_info(self,name,color,human):
         self.name = name
         self.color = color

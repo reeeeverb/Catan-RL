@@ -148,7 +148,6 @@ class Front():
                 self.corners[index] = new_rect
         pygame.display.flip() 
 
-
     def refresh(self,board):
         pygame.draw.rect(self.screen,"aqua",[(0,0),(600,720)])
         self.draw_board(GLOBAL_X,GLOBAL_Y,board)
