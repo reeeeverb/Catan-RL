@@ -21,7 +21,6 @@ class Player():
             board.place_settlement(loc,self,pregame)
             self.craft_count["Settlement"]+=1
             return True
-        print(board.legal_placement(loc,self,pregame))
         return False 
     def place_road(self,board,loc,pregame=False):
         if board.legal_road(loc,self,pregame)[0]:

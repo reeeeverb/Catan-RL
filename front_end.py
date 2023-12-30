@@ -1,5 +1,7 @@
 import pygame
 import sprites
+GLOBAL_X = 200
+GLOBAL_Y = 175
 class Front():
     def __init__(self,*args,**kwargs):
         pygame.init()
@@ -142,12 +144,14 @@ class Front():
             if board.corner_placeable[index] == True:
                 old_rect = self.corners[index]
                 c = old_rect.center
-                new_rect = pygame.draw.circle(self.screen,player.color,(c[0],c[1]),10)
+                new_rect = pygame.draw.circle(self.screen,player.color,(c[0],c[1]),8)
                 self.corners[index] = new_rect
         pygame.display.flip() 
 
 
     def refresh(self,board):
+        pygame.draw.rect(self.screen,"aqua",[(0,0),(600,720)])
+        self.draw_board(GLOBAL_X,GLOBAL_Y,board)
         for index in range(len(board.road_locations)):
             if board.road_locations[index] != None:
                 self.draw_road(index,board.road_locations[index])

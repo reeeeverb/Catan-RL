@@ -96,7 +96,7 @@ class Board():
             self.turn_tree[self.numbers[tile]].append((self.terrains[tile],player))
         if loc in HARBOR_LOCATIONS:
             self.harbor_ownership[HARBOR_LOCATIONS.index(loc)//2] = player
-            player.harbors_owned.append(self.harbors[HARBOR_LOCATIONS.index(loc//2)])
+            player.harbors_owned.append(self.harbors[HARBOR_LOCATIONS.index(loc)//2])
         return True
     def legal_road(self,loc,player,pregame=False):
         if self.road_locations[loc] != None:
@@ -204,7 +204,7 @@ class Development_Cards():
 class Bank():
     def __init__(self, *args, **kwargs):
         self.resource_cards = {"Brick":0,"Lumber":0,"Ore":0,"Grain":0,"Wool":0}
-        self.building_costs = {"Settlement":{"Brick":0,"Lumber":1,"Ore":0,"Grain":0,"Wool":0},
+        self.building_costs = {"Settlement":{"Brick":1,"Lumber":1,"Ore":0,"Grain":1,"Wool":1},
                                "Road":{"Brick":1,"Lumber":1,"Ore":0,"Grain":0,"Wool":0},
                                "City":{"Brick":0,"Lumber":0,"Ore":3,"Grain":0,"Wool":2},
                                "Development_Card":{"Brick":0,"Lumber":0,"Ore":1,"Grain":1,"Wool":1}}
@@ -233,8 +233,8 @@ class Bank():
         if not self.can_afford(thing,player)[0]:
             return self.can_afford(thing,player)
         for key in self.resources:
-            player.resource[key] -= self.building_costs[thing][key]
-            self.resource_cards += self.building_costs[thing][key]
+            player.resource_cards[key] -= self.building_costs[thing][key]
+            self.resource_cards[key] += self.building_costs[thing][key]
             return True
     def dice_rolled(self,turn_tree):
         terrain_to_resource = {"Forest":"Lumber","Hills":"Brick","Mountains":"Ore","Fields":"Grain","Pasture":"Wool"}

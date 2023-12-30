@@ -77,7 +77,25 @@ class Game():
             self.front_end.refresh(self.game_board)
     def craft_settlement_clicked(self,player,board):
         self.front_end.show_legal_settlement_loc(board,player)
-        time.sleep(10000)
+        not_done = True
+        while not_done:
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONUP:
+                    pos = pygame.mouse.get_pos()
+                    clicked = [s for s in self.front_end.corners if s.collidepoint(pos)]
+                    print(clicked)
+                    if clicked !=[]:
+                        index = self.front_end.corners.index(clicked[0])
+                        if board.legal_placement(index,player):
+                            if player.place_settlement(board,int(index)):
+                                print("hit")
+                                self.front_end.refresh(board)
+                                return True
+                    else:
+                        print("Invalid Location")
+                        return False
+                if event.type == pygame.QUIT:
+                    running = False
         return
     def take_turn(self):
         game_over = False
