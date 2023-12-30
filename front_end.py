@@ -149,7 +149,7 @@ class Front():
                 self.corners[index] = new_rect
         pygame.display.flip() 
 
-    def refresh(self,board,player=None):
+    def refresh(self,board,player_arr = None, player=None):
         pygame.draw.rect(self.screen,"aqua",[(0,0),(600,720)])
         self.draw_board(GLOBAL_X,GLOBAL_Y,board)
         for index in range(len(board.road_locations)):
@@ -160,7 +160,7 @@ class Front():
                 self.draw_settlement(index,board.settlement_locations[index])
         if player != None:
             self.clear_turn()
-            self.draw_player_turn(board,player)
+            self.draw_player_turn(board,player_arr,player)
         pygame.display.flip()
 
     def steal_from(self,stealable):
@@ -228,7 +228,7 @@ class Front():
 
         pygame.display.flip()
 
-    def draw_trade(self,board,player,selection=False):
+    def draw_trade(self,board,player_arr,player,selection=False):
 
         pygame.draw.rect(self.screen,"aqua",[(650,450),(650,150)])
         for sprite in self.turn_sprites:
@@ -256,6 +256,16 @@ class Front():
 
         wool = sprites.Wool_Trade(self.screen,830,490,player.trade_resources["Wool"])
         sprite_list.append(wool)
+
+        offset = 0
+        for temp in player_arr:
+            if temp != player:
+                label = sprites.Trade_Label(self.screen,temp.name,offset)
+                sprite_list.append(label)
+                offset +=100
+        label = sprites.Trade_Label(self.screen,"Bank",offset)
+        sprite_list.append(label)
+
         pygame.display.flip()
 
         if not selection:
@@ -268,7 +278,7 @@ class Front():
 
         return
 
-    def draw_player_turn(self,board,player):
+    def draw_player_turn(self,board,player_arr,player):
         font = pygame.font.SysFont(None, 48)
 
         lumber = sprites.Lumber_RC(self.screen,player.resource_cards["Lumber"])
@@ -309,7 +319,7 @@ class Front():
 
         self.update_development_cards_display(board,player)
 
-        self.draw_trade(board,player)
+        self.draw_trade(board,player_arr,player)
 
         return self.turn_sprites
 

@@ -134,10 +134,10 @@ class Game():
                         if board.legal_placement(index,player):
                             if player.place_settlement(board,int(index)):
                                 print("hit")
-                                self.front_end.refresh(board,player)
+                                self.front_end.refresh(board,self.player_arr,player)
                                 return True
                     else:
-                        self.front_end.refresh(board,player)
+                        self.front_end.refresh(board,self.player_arr,player)
                         return False
                 if event.type == pygame.QUIT:
                     running = False
@@ -154,10 +154,10 @@ class Game():
                         index = self.front_end.edges.index(clicked[0])
                         if board.legal_placement(index,player):
                             if player.place_road(board,int(index)):
-                                self.front_end.refresh(board,player)
+                                self.front_end.refresh(board,self.player_arr,player)
                                 return True
                     else:
-                        self.front_end.refresh(board,player)
+                        self.front_end.refresh(board,self.player_arr,player)
                         return False
                 if event.type == pygame.QUIT:
                     running = False
@@ -168,7 +168,7 @@ class Game():
         self.game_board.bank.craft("Development_Card",player)
         print(player.development_cards)
         self.front_end.update_development_cards_display(board,player)
-        self.front_end.refresh(board,player)
+        self.front_end.refresh(board,self.player_arr,player)
     def play_knight(self,board,player):
         move_robber(board,player,True)
         player.played_knights += 1
@@ -197,7 +197,7 @@ class Game():
                         not_done = False
                 if event.type == pygame.QUIT:
                     running = False
-        self.front_end.refresh(board,player)
+        self.front_end.refresh(board,self.player_arr,player)
     def play_rb(self,board,player):
         return
     def play_yop(self,board,player):
@@ -216,7 +216,7 @@ class Game():
                         print("YOP:" + clicked[0].name)
                         if board.bank.give_resource(clicked[0].name.split()[0],player):
                             count += 1
-                            self.front_end.refresh(board,player)
+                            self.front_end.refresh(board,self.player_arr,player)
                         if count == 2:
                             not_done = False
                 if event.type == pygame.QUIT:
@@ -235,7 +235,7 @@ class Game():
                     if roll_result == 7:
                         self.move_robber(self.game_board,player)
                     turn_ended = False
-                    sprites = self.front_end.draw_player_turn(self.game_board,player)
+                    sprites = self.front_end.draw_player_turn(self.game_board,self.player_arr,player)
                     while not turn_ended:
                         for event in pygame.event.get():
                             if event.type == pygame.MOUSEBUTTONUP:
@@ -260,22 +260,22 @@ class Game():
                                     self.play_yop(self.game_board,player)
                                 elif clicked !=[] and clicked[0].name == "Lumber trade" and player.resource_cards["Lumber"]> player.trade_resources["Lumber"]:
                                     player.trade_resources["Lumber"] += 1
-                                    self.front_end.draw_trade(board,player)
+                                    self.front_end.draw_trade(board,self.player_arr,player)
                                 elif clicked != [] and event.button == 3:
                                     player.trade_resources = {"Brick":0, "Lumber":0, "Ore":0, "Grain":0, "Wool":0}
-                                    self.front_end.draw_trade(board,player)
+                                    self.front_end.draw_trade(board,self.player_arr,player)
                                 elif clicked !=[] and clicked[0].name == "Brick trade" and player.resource_cards["Brick"]> player.trade_resources["Brick"]:
                                     player.trade_resources["Brick"] += 1
-                                    self.front_end.draw_trade(board,player)
+                                    self.front_end.draw_trade(board,self.player_arr,player)
                                 elif clicked !=[] and clicked[0].name == "Ore trade" and player.resource_cards["Ore"]> player.trade_resources["Ore"]:
                                     player.trade_resources["Ore"] += 1
-                                    self.front_end.draw_trade(board,player)
+                                    self.front_end.draw_trade(board,self.player_arr,player)
                                 elif clicked !=[] and clicked[0].name == "Grain trade" and player.resource_cards["Grain"]> player.trade_resources["Grain"]:
                                     player.trade_resources["Grain"] += 1
-                                    self.front_end.draw_trade(board,player)
+                                    self.front_end.draw_trade(board,self.player_arr,player)
                                 elif clicked !=[] and clicked[0].name == "Wool trade" and player.resource_cards["Wool"]> player.trade_resources["Wool"]:
                                     player.trade_resources["Wool"] += 1
-                                    self.front_end.draw_trade(board,player)
+                                    self.front_end.draw_trade(board,self.player_arr,player)
                                 else:
                                     print("Invalid Location")
                             if event.type == pygame.QUIT:
