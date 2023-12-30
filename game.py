@@ -89,11 +89,32 @@ class Game():
                     if clicked !=[]:
                         index = clicked[0].index
                         board.robber_tile = index
-                        return
+                        not_done = False 
                     else:
                         print("No")
                 if event.type == pygame.QUIT:
                     not_done = False
+        stealable = []
+        for number in self.game_board.turn_tree:
+            for tile in number:
+                if tile[2] == index and tile[1] not in stealable and tile[1] != player:
+                    stealable.append(tile[1])
+        self.front_end.steal_from(stealable)
+        not_done = True
+        while not_done:
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONUP:
+                    pos = pygame.mouse.get_pos()
+                    clicked = [s for s in self.front_end.steal_sprites if s.rect.collidepoint(pos)]
+                    if clicked !=[]:
+                        person = clicked[0].person
+                        print(person.name)
+                        not_done = False 
+                    else:
+                        print("No")
+                if event.type == pygame.QUIT:
+                    not_done = False
+
     def craft_settlement_clicked(self,player,board):
         self.front_end.show_legal_settlement_loc(board,player)
         not_done = True

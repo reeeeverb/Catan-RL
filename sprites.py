@@ -12,6 +12,29 @@ class Terrain_Tile(pygame.sprite.Sprite):
         img = font.render(str(number),True,"aqua")
         screen.blit(img,(x-10,y-65))
 
+class Steal_From(pygame.sprite.Sprite):
+    def __init__(self, board, screen, stealable):
+        super(Steal_From, self).__init__()
+        font = pygame.font.SysFont(None, 32)
+        img = font.render("Who would you like to steal from?",True,"black")
+        screen.blit(img,(110,500))
+        offset = 0
+        for people in stealable:
+            label = Person_Label(screen,people,offset)
+            board.steal_sprites.add(label)
+            offset += 200
+
+class Person_Label(pygame.sprite.Sprite):
+    def __init__(self,screen,person,offset):
+        super(Person_Label, self).__init__()
+        self.person = person
+        font = pygame.font.SysFont(None, 42)
+        img = font.render(person.name,True,"black")
+        screen.blit(img,(110+offset,600))
+        self.rect = pygame.Rect(110+offset,600,175,50)
+
+
+
 class Lumber_RC(pygame.sprite.Sprite):
     def __init__(self, screen, lumber_count):
         super(Lumber_RC, self).__init__()

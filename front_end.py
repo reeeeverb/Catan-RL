@@ -21,6 +21,7 @@ class Front():
         self.settlement_bg_sprites = pygame.sprite.Group()
         self.tile_sprites = pygame.sprite.Group()
         self.turn_sprites = pygame.sprite.Group()
+        self.steal_sprites = pygame.sprite.Group()
 
     def draw_tile(self,x,y,terrain,index,n):
         screen = self.screen
@@ -159,6 +160,10 @@ class Front():
         if player != None:
             self.clear_turn()
             self.draw_player_turn(board,player)
+        pygame.display.flip()
+
+    def steal_from(self,stealable):
+        steal_from = sprites.Steal_From(self,self.screen,stealable)
         pygame.display.flip()
 
     def clear_turn(self):
