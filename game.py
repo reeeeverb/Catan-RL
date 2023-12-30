@@ -22,7 +22,6 @@ class Game():
         self.player_arr = [self.player1,self.player2,self.player3]
         self.dice = board.Dice()
         self.front_end = front_end.Front()
-        self.robber_tile = self.game_board.terrains.index("Desert")
         self.pregame_setup()
         self.board_corners = []
         self.board_edges = []
@@ -89,7 +88,8 @@ class Game():
                     clicked = [s for s in self.front_end.tile_sprites if s.rect.collidepoint(pos)]
                     if clicked !=[]:
                         index = clicked[0].index
-                        print(index)
+                        board.robber_tile = index
+                        return
                     else:
                         print("No")
                 if event.type == pygame.QUIT:
@@ -157,11 +157,12 @@ class Game():
             for player in self.player_arr:
                 roll_result = self.dice.roll_two()
                 print("A {} was rolled!".format(roll_result))
-                self.game_board.bank.dice_rolled(self.game_board.turn_tree[roll_result])
+                self.game_board.bank.dice_rolled(self.game_board,self.game_board.turn_tree[roll_result])
                 if player.human:
                     if roll_result == 7:
-                        self.move_robber(board,player)
+                        self.move_robber(self.game_board,player)
                     turn_ended = False
+                    print("RobberTile" + str(self.game_board.robber_tile))
                     sprites = self.front_end.draw_player_turn(self.game_board,player)
                     while not turn_ended:
                         for event in pygame.event.get():

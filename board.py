@@ -16,6 +16,7 @@ class Board():
         self.road_corners = 54*[[]]
         self.harbor_ownership = 9*[False]
         self.bank = Bank()
+        self.robber_tile = self.terrains.index("Desert")
         self.turn_tree = 13*[[] for i in range(13)]
         self.pygame_coords = (None,None)
         self.corner_placeable = 54*[True]
@@ -28,6 +29,7 @@ class Board():
         random.shuffle(self.harbors)
         n.insert(self.terrains.index("Desert"),0)
         self.numbers = n
+        self.robber_tile = self.terrains.index("Desert")
     def legal_placement(self,loc,player,pregame=False):
         affected = [loc]
         if pregame and loc not in LEGAL_PREGAME:
@@ -93,7 +95,7 @@ class Board():
             self.corner_placeable[corner] = False
         self.road_corners[loc].append(player)
         for tile in VERTEX_CONTACTS[loc]:
-            self.turn_tree[self.numbers[tile]].append((self.terrains[tile],player))
+            self.turn_tree[self.numbers[tile]].append((self.terrains[tile],player,tile))
         if loc in HARBOR_LOCATIONS:
             self.harbor_ownership[HARBOR_LOCATIONS.index(loc)//2] = player
             player.harbors_owned.append(self.harbors[HARBOR_LOCATIONS.index(loc)//2])
@@ -236,12 +238,15 @@ class Bank():
             player.resource_cards[key] -= self.building_costs[thing][key]
             self.resource_cards[key] += self.building_costs[thing][key]
         return True
-    def dice_rolled(self,turn_tree):
+    def dice_rolled(self,board,turn_tree):
         terrain_to_resource = {"Forest":"Lumber","Hills":"Brick","Mountains":"Ore","Fields":"Grain","Pasture":"Wool"}
         if len(turn_tree) == 0:
             return True
         for e in turn_tree:
-            self.give_resource(terrain_to_resource[e[0]],e[1])
+            if e[2] != board.robber_tile:
+                self.give_resource(terrain_to_resource[e[0]],e[1])
+            else:
+                print("Resource {} blocked from {}".format(e[0],e[1]))
 
 class Dice():
     def roll_one(self):
