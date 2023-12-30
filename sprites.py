@@ -48,7 +48,7 @@ class Person_Label(pygame.sprite.Sprite):
         font = pygame.font.SysFont(None, 42)
         img = font.render(person.name,True,"black")
         screen.blit(img,(110+offset,600))
-        self.rect = pygame.Rect(110+offset,600,175,50)
+        self.rect = pygame.Rect(110+offset,600,175,25)
 
 class Lumber_Trade(pygame.sprite.Sprite):
     def __init__(self, screen, x, y, lumber_count):
@@ -132,7 +132,7 @@ class Trade_Label(pygame.sprite.Sprite):
         else:
             img = font.render(name,True,"black")
         screen.blit(img,(x+offset,y))
-        self.rect = pygame.Rect(x+offset,y,100,50)
+        self.rect = pygame.Rect(x+offset,y,100,25)
 
 class Lumber_RC(pygame.sprite.Sprite):
     def __init__(self, screen, lumber_count):

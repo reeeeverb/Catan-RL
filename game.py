@@ -260,6 +260,7 @@ class Game():
                                     self.play_yop(self.game_board,player)
                                 elif clicked != [] and event.button == 3:
                                     player.trade_resources = {"Brick":0, "Lumber":0, "Ore":0, "Grain":0, "Wool":0}
+                                    player.trade_take_resources = {"Brick":0, "Lumber":0, "Ore":0, "Grain":0, "Wool":0}
                                     self.front_end.draw_trade(board,self.player_arr,player)
                                 elif clicked !=[] and clicked[0].name == "Lumber trade":
                                     if clicked[0].rect.x < 950 and player.resource_cards["Lumber"]> player.trade_resources["Lumber"]:
@@ -267,17 +268,29 @@ class Game():
                                     else:
                                         player.trade_take_resources["Lumber"] += 1
                                     self.front_end.draw_trade(board,self.player_arr,player)
-                                elif clicked !=[] and clicked[0].name == "Brick trade" and player.resource_cards["Brick"]> player.trade_resources["Brick"]:
-                                    player.trade_resources["Brick"] += 1
+                                elif clicked !=[] and clicked[0].name == "Brick trade":
+                                    if clicked[0].rect.x < 950 and player.resource_cards["Brick"]> player.trade_resources["Brick"]:
+                                        player.trade_resources["Brick"] += 1
+                                    else:
+                                        player.trade_take_resources["Brick"] += 1
                                     self.front_end.draw_trade(board,self.player_arr,player)
-                                elif clicked !=[] and clicked[0].name == "Ore trade" and player.resource_cards["Ore"]> player.trade_resources["Ore"]:
-                                    player.trade_resources["Ore"] += 1
+                                elif clicked !=[] and clicked[0].name == "Ore trade":
+                                    if clicked[0].rect.x < 950 and player.resource_cards["Ore"]> player.trade_resources["Ore"]:
+                                        player.trade_resources["Ore"] += 1
+                                    else:
+                                        player.trade_take_resources["Ore"] +=1
                                     self.front_end.draw_trade(board,self.player_arr,player)
-                                elif clicked !=[] and clicked[0].name == "Grain trade" and player.resource_cards["Grain"]> player.trade_resources["Grain"]:
-                                    player.trade_resources["Grain"] += 1
+                                elif clicked !=[] and clicked[0].name == "Grain trade":
+                                    if clicked[0].rect.x < 950 and player.resource_cards["Grain"]> player.trade_resources["Grain"]:
+                                        player.trade_resources["Grain"] += 1
+                                    else:
+                                        player.trade_take_resources["Grain"] += 1
                                     self.front_end.draw_trade(board,self.player_arr,player)
-                                elif clicked !=[] and clicked[0].name == "Wool trade" and player.resource_cards["Wool"]> player.trade_resources["Wool"]:
-                                    player.trade_resources["Wool"] += 1
+                                elif clicked !=[] and clicked[0].name == "Wool trade":
+                                    if clicked[0].rect.x < 950 and player.resource_cards["Wool"]> player.trade_resources["Wool"]:
+                                        player.trade_resources["Wool"] += 1
+                                    else:
+                                        player.trade_take_resources["Wool"] +=1
                                     self.front_end.draw_trade(board,self.player_arr,player)
                                 elif clicked !=[] and len(clicked[0].name.split()) == 3 and clicked[0].name.split()[2] == "label":
                                     print("hit")
