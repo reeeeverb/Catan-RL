@@ -117,7 +117,7 @@ class Front():
                 result.append((x+100,y))
             x +=100 
         for c in result:
-            s = pygame.draw.circle(self.screen,"red",(c[0],c[1]),5)
+            s = pygame.draw.circle(self.screen,"black",(c[0],c[1]),5)
             sprites.append(s)
         return sprites
     def draw_settlement(self,index,player):

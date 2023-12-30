@@ -18,6 +18,7 @@ class Board():
         self.bank = Bank()
         self.turn_tree = 13*[[] for i in range(13)]
         self.pygame_coords = (None,None)
+        self.corner_placeable = 54*[True]
     def generate_random_board(self):
         # 4*Pasture, 4*Forest, 4*Fields, 3*Hills, 3*Mountains, 1*Desert
         # 1*2, 2*3, 2*4, 2*5, 2*6, 2*8, 2*9, 2*10, 2*11, 1*12
@@ -28,27 +29,53 @@ class Board():
         n.insert(self.terrains.index("Desert"),0)
         self.numbers = n
     def legal_placement(self,loc,player,pregame=False):
+        affected = [loc]
         if pregame and loc not in LEGAL_PREGAME:
-            return False
+            return False, "not legal in pregame"
         if not pregame and (not self.bank.can_afford("Settlement",player)[0]) and (player not in self.road_corners[loc]):
-            return False
+            return False, "cannot afford"
         if not self.sides_clear(loc):
-            print("sides")
-            return False
+            return False, "sides"
+
+        if loc not in LEFT_EDGES:
+            affected.append(loc-1)
+        if loc not in RIGHT_EDGES:
+            affected.append(loc+1)
+        
         if loc < 7 and (loc%2==1 or (loc%2==0 and self.clear_corners[loc+8])):
-            return True
+            if loc%2 == 0:
+                affected.append(loc+8)
+            return True,affected
         if loc > 6 and loc < 16 and ((loc%2==1 and self.clear_corners[loc+10]) or (loc%2==0 and self.clear_corners[loc-8])):
-            return True
+            if loc%2==1:
+                affected.append(loc+10)
+            else:
+                affected.append(loc-8)
+            return True,affected
         if loc > 15 and loc < 27 and ((loc%2==1 and self.clear_corners[loc-10]) or (loc%2==0 and self.clear_corners[loc+11])):
-            return True
+            if loc%2 ==1:
+                affected.append(loc-10)
+            else:
+                affected.append(loc+11)
+            return True,affected
         if loc > 26 and loc < 38 and ((loc%2==1 and self.clear_corners[loc-11]) or (loc%2==0 and self.clear_corners[loc+10])):
-            return True
+            if loc%2==1:
+                affected.append(loc-11)
+            else:
+                affected.append(loc+10)
+            return True,affected
         if loc > 37 and loc < 47 and ((loc%2==1 and self.clear_corners[loc+8]) or (loc%2==0 and self.clear_corners[loc-10])):
-            return True
+            if loc%2==1:
+                affected.append(loc+8)
+            else:
+                affected.append(loc-10)
+            return True,affected
         if loc > 46 and loc < 54 and ((loc%2==1 and self.clear_corners[loc-8]) or loc%2==0):
-            return True
-        print("vertical")
-        return False
+            if loc%2==1:
+                affected.append(loc-8)
+            return True,affected
+
+        return False,"vertical"
     def sides_clear(self,loc):
         if loc not in LEFT_EDGES and not self.clear_corners[loc-1]:
             return False
@@ -56,11 +83,14 @@ class Board():
             return False
         return True
     def place_settlement(self,loc,player,pregame=False):
-        if not self.legal_placement(loc,player,pregame):
+        lp_result = self.legal_placement(loc,player,pregame)
+        if not lp_result[0]:
             return False
         self.bank.craft("Settlement",player)
         self.settlement_locations[loc] = player
         self.clear_corners[loc] = False
+        for corner in lp_result[1]:
+            self.corner_placeable[corner] = False
         self.road_corners[loc].append(player)
         for tile in VERTEX_CONTACTS[loc]:
             self.turn_tree[self.numbers[tile]].append((self.terrains[tile],player))

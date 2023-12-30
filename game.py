@@ -75,6 +75,8 @@ class Game():
                     if event.type == pygame.QUIT:
                         running = False
             self.front_end.refresh(self.game_board)
+    def craft_settlement_clicked(self,player,board):
+        return
     def take_turn(self):
         game_over = False
         while not game_over:
@@ -93,8 +95,8 @@ class Game():
                                 print(clicked)
                                 if clicked !=[] and clicked[0].name == "end turn":
                                     turn_ended = True
-                                elif clicked !=[] and clicked[0].name == "settlement"
-                                    self.craft_settlement_clicked(player)
+                                elif clicked !=[] and clicked[0].name == "settlement":
+                                    self.craft_settlement_clicked(player, self.game_board)
                                 else:
                                     print("Invalid Location")
                             if event.type == pygame.QUIT:
