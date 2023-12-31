@@ -228,9 +228,9 @@ class Bank():
             return False
         self.resource_cards[resource] -= 1
         return True
-    def take_resource(self,resource,player):
+    def take_resource(self,resource,player,num = 1):
         if player.resource_cards[resource] > 0:
-            player.resource_cards[resource] -= 1
+            player.resource_cards[resource] -= num
         else:
             return False
         self.resource_cards[resource] += 1

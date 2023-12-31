@@ -169,24 +169,27 @@ class Game():
         print(player.development_cards)
         self.front_end.update_development_cards_display(board,player)
         self.front_end.refresh(board,self.player_arr,player)
-    def trade_submitted(player,trading_entity):
+    def trade_submitted(self,player,trading_entity):
         rate = 4
         if "3" in player.harbors_owned:
             rate = 3
-        if trading_entity == "Bank":
+        if trading_entity.name.split()[0] == "Bank":
             if sum(player.trade_resources.values()) == rate and sum(player.trade_take_resources.values()) ==1:
-                for key in self.trade_resources.keys():
+                for key in player.trade_resources.keys():
                     if player.trade_resources[key] == rate:
-                        self.game_board.bank.take_resource(key,player)
-                        self.game_board.bank.give_resource(key,player)
-            else if sum(player.trade_resources.values()) == 2:#and (sum(player.trade_take_resources.values()) ==1):  
+                        for key2 in player.trade_take_resources.keys():
+                            if player.trade_take_resources[key2] == 1:
+                                self.game_board.bank.take_resource(key,player,rate)
+                                self.game_board.bank.give_resource(key2,player)
+                                breakpoint()
+            elif sum(player.trade_resources.values()) == 2 and (sum(player.trade_take_resources.values()) ==1):
                 for harbor in player.harbors_owned:
                     if harbor == "3":
                         break;
                     if player.trade_resources[harbor] == 2:
                         self.game_board.bank.take_resource(key,player)
                         self.game_board.bank.give_resource(key,player)
-
+        self.front_end.refresh(self.game_board,self.player_arr,player)
 
     def play_knight(self,board,player):
         move_robber(board,player,True)
