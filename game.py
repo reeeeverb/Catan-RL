@@ -187,8 +187,10 @@ class Game():
                     if harbor == "3":
                         break;
                     if player.trade_resources[harbor] == 2:
-                        self.game_board.bank.take_resource(key,player)
-                        self.game_board.bank.give_resource(key,player)
+                        self.game_board.bank.take_resource(harbor,player,2)
+                        for key in player.trade_take_resources.keys():
+                            if player.trade_take_resources[key] == 1:
+                                self.game_board.bank.give_resource(key,player)
         self.front_end.refresh(self.game_board,self.player_arr,player)
 
     def play_knight(self,board,player):
